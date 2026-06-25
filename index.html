@@ -448,7 +448,7 @@
   .chrome{ text-transform:none!important; letter-spacing:.12em!important; }
   .chrome .left{ text-transform:none!important; gap:0!important; }
   .chrome .left span{ text-transform:none!important; }
-  .kicker{ font-size:15px!important; text-transform:none!important; letter-spacing:.22em!important; }
+  .kicker{ font-size:clamp(15px,1.34vw,22px)!important; line-height:1.55!important; text-transform:none!important; letter-spacing:.22em!important; }
   .foot .title.foot-plain{ font-family:var(--mono)!important; font-size:15px!important; letter-spacing:.14em!important; text-transform:none!important; color:currentColor!important; opacity:1!important; }
   #hint{ color:rgb(241,243,245)!important; opacity:.72!important; font-size:12px!important; }
   body.light-bg #hint{ color:rgb(10,31,61)!important; opacity:.58!important; mix-blend-mode:normal!important; }
@@ -458,18 +458,26 @@
   .split-balanced{ flex:1; margin:auto 0!important; display:grid!important; grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important; gap:4vw!important; align-items:center!important; justify-content:center!important; padding-top:0!important; }
   .split-balanced > *{ min-width:0; width:100%; }
   .split-balanced .frame-img{ align-self:center; max-height:58vh; }
+  .split-balanced h2.h-xl,
+  .split-balanced h2.h-md,
+  .deck-main-title{ font-size:min(4.7vw,8vh)!important; line-height:1.12!important; }
+  .split-balanced .kicker,
+  .split-balanced .body-zh,
+  .split-balanced .callout .body-zh{ font-size:clamp(15px,1.34vw,22px)!important; line-height:1.55!important; }
+  .slide > div > p.body-zh{ font-size:clamp(15px,1.34vw,22px)!important; line-height:1.55!important; }
   .frame-img{ display:flex!important; flex-direction:column!important; }
   .preview-figure{ position:relative!important; overflow:hidden!important; }
   .preview-hint{ position:absolute; left:50%; top:47%; transform:translate(-50%,-50%); z-index:2; display:inline-flex; align-items:center; gap:.55em; padding:.85vh 1.3vw; border:2px solid #ff4d42; border-radius:999px; background:rgba(255,255,255,.94); color:#0a1f3d; font-family:var(--sans-zh); font-size:15px; font-weight:700; letter-spacing:0; box-shadow:0 1.4vh 3vh rgba(10,31,61,.18); }
   .preview-hint::before{ content:"↗"; display:grid; place-items:center; width:1.55em; height:1.55em; border-radius:999px; background:#ff4d42; color:#fff; font-family:var(--mono); font-size:.9em; }
   .frame-img > img{ flex:1 1 auto!important; min-height:0!important; height:auto!important; }
   .frame-img > .img-cap{ flex:0 0 auto!important; }
-  .fill-img > img{ object-fit:cover!important; object-position:center center!important; }
+  .fill-img > img{ width:100%!important; height:100%!important; object-fit:cover!important; object-position:center center!important; }
+  .github-signup-shot > img{ object-fit:contain!important; object-position:center center!important; }
   .img-cap{ font-size:15px!important; text-transform:none!important; letter-spacing:.08em!important; line-height:1.45!important; }
   .img-cap.pad-cap{ padding:0 0 16px 16px!important; margin-top:0!important; }
   .img-cap.no-cap-bottom{ padding-bottom:0!important; }
   .slide.dark .img-cap.dark-on-light{ color:#000!important; }
-  .slide.dark .img-cap.white-cap{ color:#fff!important; }
+  .img-cap.white-cap{ color:#fff!important; }
   a.deck-link{ color:inherit; text-decoration:underline; text-underline-offset:.16em; }
   .root-stack{ display:grid; grid-template-columns:1fr 1fr; gap:1vw; }
   .root-example{ padding:1.6vh 1.4vw!important; }
@@ -524,7 +532,7 @@
      页面组件参考 references/components.md
      ============================================================ -->
 
-<section class="slide hero dark" data-animate="hero">
+<section class="slide hero dark" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>01 / 16</span></div></div>
   <div style="flex:1;display:grid;align-content:center;max-width:86vw">
     <div class="kicker" data-anim>Codex HTML部署</div>
@@ -577,16 +585,16 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide light" data-animate="slide-left">
+<section class="slide light" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>04 / 16</span></div></div>
   <div class="grid-2-6-6 split-balanced">
-    <div data-anim>
+    <div data-anim="left">
       <div class="kicker">文件准备</div>
       <h2 class="h-xl" style="font-size:min(4.6vw,8vh);line-height:1.14">先把首页文件<br>命名为 index.html</h2>
       <p class="body-zh" style="margin-top:3vh;max-width:38vw">命名为小写的 <strong>index.html</strong>，这样别人打开根链接时，页面会自动显示。</p>
       <div class="callout" style="margin-top:4vh"><p class="body-zh">推荐结构：index.html、style.css、script.js、images/。</p></div>
     </div>
-    <figure class="frame-img fit-contain r-16x10" data-anim style="background:rgba(255,255,255,.68);padding:0">
+    <figure class="frame-img fit-contain r-16x10" data-anim="right" style="background:rgba(255,255,255,.68);padding:0">
       <img src="images/04-local-index-file.png" alt="Mac 文件夹里准备好的 index.html">
       <figcaption class="img-cap pad-cap">电脑里要有真实的小写 index.html 文件。</figcaption>
     </figure>
@@ -594,14 +602,14 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide light" data-animate="slide-left">
+<section class="slide light" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>05 / 16</span></div></div>
   <div class="grid-2-6-6 split-balanced">
-    <figure class="frame-img r-16x10 fill-img" data-anim style="background:#07083a;padding:0">
+    <figure class="frame-img r-16x10 fill-img github-signup-shot" data-anim="left" style="background:#07083a;padding:0">
       <img src="images/06-github-signup.png" alt="GitHub 首页右上角 Sign up">
       <figcaption class="img-cap pad-cap white-cap">点击右上角 Sign up。</figcaption>
     </figure>
-    <div data-anim style="align-self:center">
+    <div data-anim="right" style="align-self:center">
       <div class="kicker">账号准备</div>
       <h2 class="h-xl" style="font-size:min(4.4vw,7.6vh);line-height:1.14">注册、验证邮箱、登录。</h2>
       <p class="body-zh" style="margin-top:3vh">先打开 <a class="deck-link" href="https://github.com" target="_blank" rel="noopener">https://github.com</a>。GitHub 用户名会出现在仓库地址里，建议用英文或拼音。邮箱验证要完成，否则后面可能无法正常创建仓库。</p>
@@ -611,15 +619,15 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide dark" data-animate="slide-up">
+<section class="slide dark" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>06 / 16</span></div></div>
   <div class="grid-2-6-6 split-balanced">
-    <div data-anim>
+    <div data-anim="left">
       <div class="kicker">创建一个仓库</div>
       <h2 class="h-xl" style="font-size:min(4.7vw,8vh);line-height:1.12">右上角加号，选择 New repository。</h2>
       <p class="body-zh" style="margin-top:3vh">如果是首次注册 GitHub，左侧可能会出现 Create repository；如果已有仓库，点击右上角 +，选择 New repository。</p>
     </div>
-    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:rgba(255,255,255,.94);padding:1vh">
+    <figure class="frame-img r-16x10 fit-contain" data-anim="right" style="background:rgba(255,255,255,.94);padding:1vh">
       <img src="images/07-github-new-repo-menu.png" alt="GitHub Dashboard 创建仓库入口">
       <figcaption class="img-cap pad-cap dark-on-light">首次注册或已有仓库，入口位置会不同。</figcaption>
     </figure>
@@ -627,31 +635,31 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide light" data-animate="slide-left">
+<section class="slide light" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>07 / 16</span></div></div>
   <div class="grid-2-6-6 split-balanced">
-    <figure class="frame-img r-16x10 fill-img" data-anim style="background:white;padding:1vh">
+    <figure class="frame-img r-16x10 fill-img" data-anim="left" style="background:white;padding:1vh">
       <img src="images/08-github-create-repo-focused.png" alt="GitHub 新建仓库表单">
       <figcaption class="img-cap pad-cap">填仓库名，保持 Public，点击 Create repository。</figcaption>
     </figure>
-    <div data-anim>
+    <div data-anim="right">
       <div class="kicker">表单怎么填</div>
-      <h2 class="h-md" style="font-size:39px;line-height:1.15">仓库名建议英文小写</h2>
-      <p class="body-zh" style="margin-top:2vh">可以用 my-html-site、brand-report、portfolio-page。不要用空格；中文不是绝对不行，但排查路径时英文更省心。</p>
+      <h2 class="h-md">仓库名建议英文小写</h2>
+      <p class="body-zh" style="margin-top:2vh">可以用 my-html-site、brand-report、portfolio-page；中文不是绝对不行，但排查路径时英文更省心。</p>
       <div class="callout" style="margin-top:3vh"><p class="body-zh">新手推荐 Public；README 可以先不勾选。</p></div>
     </div>
   </div>
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide light" data-animate="slide-left">
+<section class="slide light" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>08 / 16</span></div></div>
   <div class="grid-2-6-6 split-balanced">
-    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:white;padding:1vh">
+    <figure class="frame-img r-16x10 fit-contain" data-anim="left" style="background:white;padding:1vh">
       <img src="images/10a-github-empty-upload-detail.png" alt="GitHub 空仓库 uploading an existing file 入口">
       <figcaption class="img-cap">空仓库页面，直接点 uploading an existing file。</figcaption>
     </figure>
-    <div data-anim>
+    <div data-anim="right">
       <div class="kicker">正确入口</div>
       <h2 class="h-xl" style="font-size:min(4.4vw,7.6vh);line-height:1.16">点蓝色文字，uploading an existing file</h2>
       <p class="body-zh" style="margin-top:3vh">creating a new file 是在线手写代码；我们现在要上传电脑里的真实文件，所以应选择 uploading an existing file。</p>
@@ -661,12 +669,12 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide dark" data-animate="stagger">
+<section class="slide dark" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>09 / 16</span></div></div>
   <div style="margin-top:4vh">
     <div class="kicker" data-anim>上传三连</div>
-    <h2 class="h-xl" data-anim style="font-size:39px;line-height:1.12">选择文件，确认列表，提交更改。</h2>
-    <p class="body-zh" data-anim style="margin-top:1.8vh;font-size:15px">如果有 style.css、script.js、images，也一起上传</p>
+    <h2 class="h-xl deck-main-title" data-anim>选择文件，确认列表，提交更改。</h2>
+    <p class="body-zh" data-anim style="margin-top:1.8vh">如果有 style.css、script.js、images，也一起上传</p>
   </div>
   <div class="grid-3 upload-grid" style="margin-top:4vh">
     <figure class="tile" data-anim><div class="frame-img h-28 fit-contain" style="background:rgba(255,255,255,.95);padding:1vh"><img src="images/11-github-choose-files.png" alt="GitHub choose your files"></div><figcaption class="img-cap">1. choose your files</figcaption></figure>
@@ -676,15 +684,15 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide light" data-animate="slide-left">
+<section class="slide light" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>10 / 16</span></div></div>
   <div class="grid-2-6-6 split-balanced">
-    <div data-anim>
+    <div data-anim="left">
       <div class="kicker">提交后先别急着去 Vercel</div>
       <h2 class="h-xl" style="font-size:min(4.3vw,7.4vh);line-height:1.15">回到仓库首页，确认最外层有 index.html。</h2>
       <p class="body-zh" style="margin-top:3vh">关键检查点: 根目录 / index.html / 文件名大小写</p>
     </div>
-    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:white;padding:1vh">
+    <figure class="frame-img r-16x10 fit-contain" data-anim="right" style="background:white;padding:1vh">
       <img src="images/12-github-repo-index.png" alt="GitHub 仓库首页出现 index.html">
       <figcaption class="img-cap pad-cap">能看到 index.html，说明上传成功。</figcaption>
     </figure>
@@ -692,15 +700,15 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide hero light" data-animate="hero">
+<section class="slide hero light" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>11 / 16</span></div></div>
   <div class="grid-2-6-6 split-balanced">
-    <div data-anim style="align-self:center">
+    <div data-anim="left" style="align-self:center">
       <div class="kicker">注册Vercel</div>
       <h2 class="h-hero" style="font-size:min(5.2vw,9vh);line-height:1.08">让 Vercel<br>接管上线</h2>
       <p class="lead" style="margin-top:3vh;max-width:42vw"><a class="deck-link" href="https://vercel.com/" target="_blank" rel="noopener">https://vercel.com/</a>；注册 Vercel 账号，推荐使用 GitHub 账号登录，后面导入仓库更顺。</p>
     </div>
-    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:white;padding:1vh">
+    <figure class="frame-img r-16x10 fit-contain" data-anim="right" style="background:white;padding:1vh">
       <img src="images/13-vercel-homepage.png" alt="Vercel 官网首页 Sign Up 入口">
       <figcaption class="img-cap pad-cap no-cap-bottom">进入 Vercel 官网后，点击 Sign Up，优先使用 GitHub 账号登录。</figcaption>
     </figure>
@@ -708,35 +716,33 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide dark" data-animate="stagger">
+<section class="slide dark" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>12 / 16</span></div></div>
-  <div style="margin-top:5vh">
-    <div class="kicker" data-anim>进入 Vercel Dashboard</div>
-    <h2 class="h-xl" data-anim style="font-size:39px;line-height:1.12">Add New 选择 Project。</h2>
-  </div>
   <div class="grid-2-6-6 split-balanced">
-    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:rgba(255,255,255,.95);padding:1vh">
+    <figure class="frame-img r-16x10 fit-contain" data-anim="left" style="background:rgba(255,255,255,.95);padding:1vh">
       <img src="images/14-vercel-add-project.png" alt="Vercel Add New Project">
       <figcaption class="img-cap">点击 Add New，再选择 Project。</figcaption>
     </figure>
-    <div data-anim style="align-self:center">
-      <p class="body-zh">登录 Vercel 后，在项目页右上角点击 Add New，选择 Project</p>
+    <div data-anim="right" style="align-self:center">
+      <div class="kicker">进入 Vercel Dashboard</div>
+      <h2 class="h-xl">Add New 选择 Project。</h2>
+      <p class="body-zh" style="margin-top:3vh">登录 Vercel 后，在项目页右上角点击 Add New，选择 Project</p>
       <div class="callout" style="margin-top:4vh"><p class="body-zh">Vercel 项目不是 GitHub 仓库的替代品，它是发布入口。</p></div>
     </div>
   </div>
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide light" data-animate="slide-left">
+<section class="slide light" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>13 / 16</span></div></div>
   <div class="grid-2-6-6 split-balanced">
-    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:white;padding:1vh">
+    <figure class="frame-img r-16x10 fit-contain" data-anim="left" style="background:white;padding:1vh">
       <img src="images/15-vercel-import-repo.png" alt="Vercel 导入 GitHub 仓库">
       <figcaption class="img-cap">找到刚才的 GitHub 仓库，点击 Import。</figcaption>
     </figure>
-    <div data-anim>
+    <div data-anim="right">
       <div class="kicker">导入 Git</div>
-      <h2 class="h-md">在 Vercel 新建项目并导入 GitHub 仓库</h2>
+      <h2 class="h-md">导入 GitHub 仓库</h2>
       <p class="body-zh" style="margin-top:2vh">在 Import Git Repository 里找到刚刚创建、并上传了 <strong>index.html</strong> 的仓库，点击右侧 Import。</p>
       <div class="callout" style="margin-top:3vh"><p class="body-zh">如果还没有关联 GitHub，Import Git Repository 区域会出现选择 Git 提供程序的引导。</p></div>
     </div>
@@ -744,10 +750,10 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide light" data-animate="slide-left">
+<section class="slide light" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>14 / 16</span></div></div>
   <div class="grid-2-6-6 split-balanced">
-    <div data-anim>
+    <div data-anim="left">
       <div class="kicker">部署参数</div>
       <h2 class="h-md">配置 Vercel 部署参数</h2>
       <p class="body-zh" style="margin-top:2vh">Application Preset 选择 <strong>Other</strong>，Root Directory 保持 <strong>./</strong>，确认无误后点击底部 Deploy。</p>
@@ -768,7 +774,7 @@ script.js</pre>
       </div>
       <p class="body-zh" style="margin-top:2vh;font-size:15px">新手最推荐第一种：直接把 index.html 放在仓库最外层。</p>
     </div>
-    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:white;padding:1vh">
+    <figure class="frame-img r-16x10 fit-contain" data-anim="right" style="background:white;padding:1vh">
       <img src="images/16-vercel-deploy-config.png" alt="Vercel 部署参数配置页">
       <figcaption class="img-cap">Preset 选 Other，Root Directory 默认保持 ./。</figcaption>
     </figure>
@@ -776,15 +782,15 @@ script.js</pre>
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide dark" data-animate="slide-up">
+<section class="slide dark" data-animate="directional">
   <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>15 / 16</span></div></div>
   <div class="grid-2-6-6 split-balanced">
-    <figure class="frame-img r-16x10 fit-contain preview-figure" data-anim style="background:rgba(255,255,255,.95);padding:1vh">
+    <figure class="frame-img r-16x10 fit-contain preview-figure" data-anim="left" style="background:rgba(255,255,255,.95);padding:1vh">
       <img src="images/15-vercel-congrats-preview.png" alt="Vercel 部署成功后的 Congratulations 页面">
       <span class="preview-hint">点击图片可预览网站</span>
       <figcaption class="img-cap">Congratulations 页面里的网站预览图可以点击打开。</figcaption>
     </figure>
-    <div data-anim style="align-self:center">
+    <div data-anim="right" style="align-self:center">
       <div class="kicker">部署成功</div>
       <h2 class="h-xl" style="font-size:min(4.4vw,7.6vh);line-height:1.16">发 Vercel 链接，别发 GitHub 地址。</h2>
       <p class="body-zh" style="margin-top:3vh">GitHub 地址给人看的是文件仓库；Vercel 地址才是访问网页。自己先用浏览器打开一次，再转发给别人。</p>
