@@ -1,1325 +1,1177 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>2026 东南亚品牌调研体验报告</title>
-  <style>
-    :root {
-      --ink: #172026;
-      --muted: #65717a;
-      --line: #d9e1e6;
-      --paper: #f7f4ee;
-      --panel: #ffffff;
-      --teal: #1a8a84;
-      --green: #57a773;
-      --blue: #427aa1;
-      --yellow: #e0a526;
-      --red: #c75b4a;
-      --violet: #7b6fbd;
-      --shadow: 0 18px 46px rgba(23, 32, 38, .12);
-      font-family: Inter, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        linear-gradient(180deg, rgba(26, 138, 132, .10), transparent 360px),
-        var(--paper);
-    }
-
-    button, input { font: inherit; }
-
-    .page-shell { min-height: 100vh; }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition:
-        opacity .72s cubic-bezier(.2, .8, .2, 1),
-        transform .72s cubic-bezier(.2, .8, .2, 1);
-      transition-delay: var(--delay, 0ms);
-      will-change: opacity, transform;
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .hero .eyebrow,
-    .hero h1,
-    .hero-copy,
-    .hero-actions {
-      animation: heroRise .84s cubic-bezier(.2, .8, .2, 1) both;
-    }
-
-    .hero h1 { animation-delay: .08s; }
-    .hero-copy { animation-delay: .18s; }
-    .hero-actions { animation-delay: .28s; }
-
-    @keyframes heroRise {
-      from { opacity: 0; transform: translateY(22px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 14px clamp(18px, 4vw, 54px);
-      background: rgba(247, 244, 238, .86);
-      border-bottom: 1px solid rgba(23, 32, 38, .08);
-      backdrop-filter: blur(18px);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      background: var(--ink);
-      border-radius: 8px;
-      font-weight: 800;
-      letter-spacing: 0;
-    }
-
-    .brand strong { display: block; font-size: 14px; white-space: nowrap; }
-    .brand span { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      overflow-x: auto;
-      padding-bottom: 2px;
-    }
-
-    .nav a {
-      color: var(--muted);
-      text-decoration: none;
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .nav a:hover { background: rgba(23, 32, 38, .06); color: var(--ink); }
-
-    main { padding-bottom: 80px; }
-
-    section {
-      padding: 54px clamp(18px, 5vw, 72px);
-    }
-
-    .hero {
-      min-height: 88vh;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
-      align-items: center;
-      gap: clamp(28px, 6vw, 76px);
-      padding-top: 52px;
-      padding-bottom: 42px;
-      border-bottom: 1px solid rgba(23, 32, 38, .08);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--teal);
-      font-size: 13px;
-      font-weight: 750;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-
-    .pulse {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--teal);
-      box-shadow: 0 0 0 6px rgba(26, 138, 132, .14);
-      animation: pulseBeat 1.8s ease-out infinite;
-    }
-
-    @keyframes pulseBeat {
-      0%, 100% { box-shadow: 0 0 0 6px rgba(26, 138, 132, .14); }
-      50% { box-shadow: 0 0 0 10px rgba(26, 138, 132, .05); }
-    }
-
-    h1 {
-      margin: 18px 0 18px;
-      max-width: 860px;
-      font-size: clamp(42px, 7vw, 88px);
-      line-height: .98;
-      letter-spacing: 0;
-    }
-
-    .hero-copy {
-      max-width: 720px;
-      color: #3c484f;
-      font-size: clamp(17px, 2vw, 22px);
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 0 16px;
-      border: 1px solid var(--ink);
-      border-radius: 8px;
-      color: var(--ink);
-      background: transparent;
-      text-decoration: none;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 14px;
-      box-shadow: 0 0 0 rgba(23, 32, 38, 0);
-      transition:
-        color .22s ease,
-        background-color .22s ease,
-        border-color .22s ease,
-        box-shadow .22s ease,
-        transform .22s ease;
-    }
-
-    .btn.primary {
-      color: #fff;
-      background: var(--ink);
-      box-shadow: 0 12px 22px rgba(23, 32, 38, .18);
-    }
-
-    .btn:hover {
-      color: var(--ink);
-      background: rgba(26, 138, 132, .10);
-      border-color: var(--teal);
-      box-shadow: 0 12px 24px rgba(23, 32, 38, .12);
-      transform: translateY(-2px);
-    }
-
-    .btn.primary:hover {
-      color: #fff;
-      background: #203139;
-      border-color: #203139;
-      box-shadow: 0 18px 32px rgba(23, 32, 38, .24);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-      box-shadow: 0 6px 14px rgba(23, 32, 38, .12);
-    }
-
-    .btn:focus-visible {
-      outline: 3px solid rgba(26, 138, 132, .28);
-      outline-offset: 3px;
-    }
-
-    .hero-visual {
-      position: relative;
-      min-height: 520px;
-      display: grid;
-      place-items: center;
-    }
-
-    .region-map {
-      width: min(100%, 520px);
-      aspect-ratio: 1 / 1;
-      position: relative;
-    }
-
-    .sea-card {
-      position: absolute;
-      inset: 7% 5%;
-      border-radius: 8px;
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, .92), rgba(255, 255, 255, .58)),
-        radial-gradient(circle at 24% 34%, rgba(66, 122, 161, .28), transparent 22%),
-        radial-gradient(circle at 76% 68%, rgba(224, 165, 38, .25), transparent 26%);
-      border: 1px solid rgba(23, 32, 38, .10);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      animation: cardFloatIn .9s cubic-bezier(.2, .8, .2, 1) .18s both;
-    }
-
-    @keyframes cardFloatIn {
-      from { opacity: 0; transform: translateY(24px) scale(.97); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .sea-card svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .country-pin {
-      position: absolute;
-      display: grid;
-      gap: 5px;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      animation: pinDrop .56s cubic-bezier(.2, .8, .2, 1) both;
-    }
-
-    .country-pin:nth-of-type(2) { animation-delay: .34s; }
-    .country-pin:nth-of-type(3) { animation-delay: .42s; }
-    .country-pin:nth-of-type(4) { animation-delay: .50s; }
-    .country-pin:nth-of-type(5) { animation-delay: .58s; }
-    .country-pin:nth-of-type(6) { animation-delay: .66s; }
-    .country-pin:nth-of-type(7) { animation-delay: .74s; }
-
-    @keyframes pinDrop {
-      from { opacity: 0; transform: translate(-50%, -62%) scale(.86); }
-      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    }
-
-    .country-pin i {
-      width: 16px;
-      height: 16px;
-      margin: 0 auto;
-      border: 3px solid #fff;
-      border-radius: 50%;
-      background: var(--teal);
-      box-shadow: 0 8px 18px rgba(23, 32, 38, .24);
-    }
-
-    .country-pin span {
-      display: block;
-      padding: 4px 7px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, .9);
-      color: var(--ink);
-      font-size: 11px;
-      font-weight: 800;
-      box-shadow: 0 7px 16px rgba(23, 32, 38, .12);
-      white-space: nowrap;
-    }
-
-    .pin-th { left: 51%; top: 44%; }
-    .pin-vn { left: 64%; top: 40%; }
-    .pin-my { left: 45%; top: 63%; }
-    .pin-id { left: 60%; top: 74%; }
-    .pin-ph { left: 78%; top: 53%; }
-    .pin-in { left: 24%; top: 42%; }
-
-    .floating-metric {
-      position: absolute;
-      left: 0;
-      bottom: 9%;
-      width: 180px;
-      padding: 16px;
-      border-radius: 8px;
-      background: #fff;
-      border: 1px solid rgba(23, 32, 38, .10);
-      box-shadow: 0 14px 36px rgba(23, 32, 38, .14);
-      animation: metricPop .66s cubic-bezier(.2, .8, .2, 1) .86s both;
-    }
-
-    @keyframes metricPop {
-      from { opacity: 0; transform: translateY(18px) scale(.94); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .floating-metric b { display: block; font-size: 30px; line-height: 1; }
-    .floating-metric span { display: block; color: var(--muted); font-size: 12px; margin-top: 6px; line-height: 1.4; }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 28px;
-      margin-bottom: 24px;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      max-width: 780px;
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: 1.12;
-      letter-spacing: 0;
-    }
-
-    .section-head p {
-      margin: 0;
-      max-width: 520px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 26px;
-    }
-
-    .kpi, .panel, .country-detail, .action-card {
-      background: rgba(255, 255, 255, .82);
-      border: 1px solid rgba(23, 32, 38, .10);
-      border-radius: 8px;
-      box-shadow: 0 10px 26px rgba(23, 32, 38, .08);
-    }
-
-    .kpi { padding: 18px; min-height: 142px; }
-    .kpi small { display: block; color: var(--muted); font-weight: 700; }
-    .kpi strong { display: block; margin-top: 14px; font-size: clamp(28px, 4vw, 46px); letter-spacing: 0; }
-    .kpi > span { display: block; margin-top: 8px; color: var(--muted); font-size: 13px; line-height: 1.45; }
-
-    .insight-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    .insight {
-      min-height: 260px;
-      padding: 22px;
-      background: var(--ink);
-      color: #fff;
-      border-radius: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .insight:nth-child(2) { background: #214c55; }
-    .insight:nth-child(3) { background: #5d5132; }
-    .insight::after {
-      content: "";
-      position: absolute;
-      right: -22px;
-      bottom: -22px;
-      width: 120px;
-      height: 120px;
-      border: 18px solid rgba(255,255,255,.09);
-      border-radius: 50%;
-    }
-    .insight h3 { margin: 0; font-size: 22px; }
-    .insight p { margin: 16px 0 0; color: rgba(255,255,255,.78); line-height: 1.7; }
-    .insight .tag { color: #fff; border-color: rgba(255,255,255,.26); background: rgba(255,255,255,.10); }
-
-    .dashboard {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 16px;
-      align-items: stretch;
-    }
-
-    .panel { padding: 20px; }
-    .panel h3 { margin: 0 0 16px; font-size: 18px; }
-
-    .bar-list { display: grid; gap: 12px; }
-    .bar-row {
-      display: grid;
-      grid-template-columns: 94px minmax(0, 1fr) 56px;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-    }
-
-    .bar-track {
-      height: 13px;
-      border-radius: 999px;
-      background: rgba(23, 32, 38, .08);
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      height: 100%;
-      width: calc(var(--value) * 1%);
-      border-radius: inherit;
-      background: var(--color, var(--teal));
-      transform: scaleX(0);
-      transform-origin: left center;
-      transition: transform 1s cubic-bezier(.2, .8, .2, 1);
-    }
-
-    .bar-list.is-visible .bar-fill,
-    .panel.is-visible .bar-fill {
-      transform: scaleX(1);
-    }
-
-    .bar-row b { text-align: right; font-variant-numeric: tabular-nums; }
-
-    .sample-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .sample {
-      padding: 14px;
-      border-radius: 8px;
-      background: rgba(23, 32, 38, .04);
-      border: 1px solid rgba(23, 32, 38, .07);
-    }
-
-    .sample strong { display: block; font-size: 24px; }
-    .sample span { color: var(--muted); font-size: 12px; }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-
-    .tab {
-      min-height: 38px;
-      padding: 0 13px;
-      border: 1px solid rgba(23, 32, 38, .18);
-      border-radius: 8px;
-      background: rgba(255,255,255,.68);
-      color: var(--muted);
-      cursor: pointer;
-      font-weight: 750;
-    }
-
-    .tab[aria-selected="true"] {
-      color: #fff;
-      border-color: var(--ink);
-      background: var(--ink);
-    }
-
-    .country-layout {
-      display: grid;
-      grid-template-columns: minmax(0, .95fr) minmax(360px, 1.05fr);
-      gap: 16px;
-    }
-
-    .country-detail { padding: 22px; }
-    .country-detail h3 { margin: 0; font-size: 30px; }
-    .country-detail p { color: var(--muted); line-height: 1.7; }
-
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 16px 0;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 0 9px;
-      border: 1px solid rgba(23, 32, 38, .12);
-      border-radius: 8px;
-      color: #3c484f;
-      background: rgba(255,255,255,.62);
-      font-size: 12px;
-      font-weight: 750;
-    }
-
-    .split-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin: 18px 0;
-    }
-
-    .mini-metric {
-      padding: 12px;
-      border-radius: 8px;
-      background: rgba(23,32,38,.045);
-    }
-
-    .mini-metric small { color: var(--muted); display: block; }
-    .mini-metric strong { display: block; margin-top: 6px; font-size: 23px; }
-
-    .journey {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .journey-step {
-      padding: 14px;
-      border: 1px solid rgba(23,32,38,.10);
-      border-radius: 8px;
-      background: #fff;
-      min-height: 126px;
-    }
-
-    .journey-step small {
-      display: inline-grid;
-      place-items: center;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      color: #fff;
-      background: var(--teal);
-      font-weight: 800;
-    }
-
-    .journey-step b { display: block; margin-top: 12px; }
-    .journey-step span { display: block; margin-top: 7px; color: var(--muted); font-size: 12px; line-height: 1.45; }
-
-    .matrix {
-      display: grid;
-      gap: 8px;
-    }
-
-    .matrix-row {
-      display: grid;
-      grid-template-columns: 116px repeat(6, minmax(0, 1fr));
-      gap: 8px;
-      align-items: stretch;
-    }
-
-    .matrix-cell {
-      min-height: 48px;
-      display: grid;
-      place-items: center;
-      padding: 8px;
-      border-radius: 8px;
-      background: rgba(23,32,38,.05);
-      color: var(--muted);
-      text-align: center;
-      font-size: 12px;
-      font-weight: 750;
-    }
-
-    .matrix-cell.head { color: var(--ink); background: transparent; box-shadow: none; }
-    .matrix-cell.hot { color: #fff; background: var(--red); }
-    .matrix-cell.warm { color: var(--ink); background: rgba(224,165,38,.48); }
-    .matrix-cell.cool { color: #fff; background: var(--teal); }
-
-    .matrix-cell.hot,
-    .matrix-cell.warm,
-    .matrix-cell.cool {
-      transition: transform .28s ease, box-shadow .28s ease;
-    }
-
-    .matrix-cell.hot:hover,
-    .matrix-cell.warm:hover,
-    .matrix-cell.cool:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 18px rgba(23,32,38,.12);
-    }
-
-    .action-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .action-card { padding: 20px; }
-    .action-card h3 { margin: 0; font-size: 20px; }
-    .action-card p { color: var(--muted); line-height: 1.65; }
-
-    .priority {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--teal);
-      font-size: 12px;
-      font-weight: 850;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-
-    .priority::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    .quote-strip {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 22px;
-    }
-
-    blockquote {
-      margin: 0;
-      padding: 18px;
-      border-left: 4px solid var(--teal);
-      border-radius: 8px;
-      background: rgba(255,255,255,.78);
-      color: #3c484f;
-      line-height: 1.7;
-    }
-
-    blockquote cite {
-      display: block;
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 750;
-    }
-
-    .footnote {
-      padding-top: 28px;
-      color: var(--muted);
-      border-top: 1px solid rgba(23,32,38,.10);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    @media (max-width: 1100px) {
-      .hero, .dashboard, .country-layout { grid-template-columns: 1fr; }
-      .hero { min-height: auto; }
-      .hero-visual { min-height: 420px; }
-      .kpi-grid, .insight-grid, .action-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .journey { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 740px) {
-      .topbar { align-items: flex-start; flex-direction: column; gap: 10px; }
-      section { padding: 40px 16px; }
-      .hero { padding-top: 36px; }
-      .section-head { display: block; }
-      .section-head p { margin-top: 12px; }
-      .kpi-grid, .insight-grid, .action-grid, .quote-strip, .sample-grid, .split-metrics { grid-template-columns: 1fr; }
-      .matrix { overflow-x: auto; padding-bottom: 8px; }
-      .matrix-row { min-width: 760px; }
-      .bar-row { grid-template-columns: 82px minmax(0, 1fr) 48px; }
-      .floating-metric { left: 12px; bottom: 0; }
-      .country-pin span { display: none; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: .001ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .001ms !important;
-      }
-
-      .reveal { opacity: 1; transform: none; }
-      .bar-fill { transform: scaleX(1); }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>把 Codex 生成的 HTML 部署到 Vercel · GitHub x Vercel 新手部署教程</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ============ 主题色(默认:🖋 墨水经典) ============
+       切换主题:从 references/themes.md 复制对应的 :root 块
+       整体替换这几行(--ink / --ink-rgb / --paper / --paper-rgb)
+       其他地方散落的 rgba() 都走 var(--ink-rgb) / var(--paper-rgb),无需逐处改 */
+    --ink:#0a1f3d;
+    --ink-rgb:10,31,61;
+    --paper:#f1f3f5;
+    --paper-rgb:241,243,245;
+    --paper-tint:#e4e8ec;
+    --ink-tint:#152a4a;
+
+    /* ============ 字体(跨主题固定) ============ */
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --serif-en:"Playfair Display","Source Serif 4",Georgia,serif;
+    --serif-body-en:"Source Serif 4",Georgia,serif;
+    --serif-zh:"Noto Serif SC",source-han-serif-sc,serif;
+    --sans-zh:"Noto Sans SC",source-han-sans-sc,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);color:var(--paper);font-family:var(--sans-zh);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+  /* ============ WebGL 双背景 ============ */
+  canvas.bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block;transition:opacity 1.2s ease}
+  canvas#bg-light{opacity:0}
+  canvas#bg-dark{opacity:1}
+  body.light-bg canvas#bg-light{opacity:1}
+  body.light-bg canvas#bg-dark{opacity:0}
+  body.low-power canvas.bg{display:none!important}
+
+  /* ============ Deck 容器 + 翻页 ============ */
+  /* width: NSLIDES * 100vw，会在 JS 里动态矫正 */
+  #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .9s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
+  .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:6vh 6vw 10vh 6vw;display:flex;flex-direction:column;overflow:hidden}
+  .slide.light{color:var(--ink);background:var(--paper)}
+  .slide.dark{color:var(--paper);background:var(--ink)}
+
+  /* 默认页：遮罩较厚，保证文字可读 */
+  .slide::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;transition:background .7s ease}
+  .slide.light::before{background:rgba(var(--paper-rgb),.78);backdrop-filter:blur(3px)}
+  .slide.dark::before{background:rgba(var(--ink-rgb),.78);backdrop-filter:blur(3px)}
+  /* Hero 页：遮罩大幅降低，让 WebGL 背景明显透出 */
+  .slide.hero.light::before{background:rgba(var(--paper-rgb),.16);backdrop-filter:none}
+  .slide.hero.dark::before{background:rgba(var(--ink-rgb),.12);backdrop-filter:none}
+  /* Hero 页顶底微弱渐隐，保证 chrome/foot 区域可读 */
+  .slide.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none}
+  .slide.hero.light::after{background:linear-gradient(180deg,rgba(var(--paper-rgb),.28) 0%,rgba(var(--paper-rgb),0) 14%,rgba(var(--paper-rgb),0) 86%,rgba(var(--paper-rgb),.28) 100%)}
+  .slide.hero.dark::after{background:linear-gradient(180deg,rgba(var(--ink-rgb),.32) 0%,rgba(var(--ink-rgb),0) 14%,rgba(var(--ink-rgb),0) 86%,rgba(var(--ink-rgb),.32) 100%)}
+
+  /* ============ Magazine chrome：顶部 meta + 底部 foot ============ */
+  .chrome{display:flex;justify-content:space-between;align-items:flex-start;font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.7}
+  .chrome .left,.chrome .right{display:flex;gap:2.4em;align-items:center}
+  .chrome .sep{width:40px;height:1px;background:currentColor;opacity:.4}
+  .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.55}
+  .foot .title{font-family:var(--serif-zh);font-weight:400;letter-spacing:.05em;text-transform:none;opacity:.75;font-size:13px}
+
+  .tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding:6px 14px;border:1px solid currentColor;opacity:.85}
+  .rule{width:100%;height:1px;background:currentColor;opacity:.25;margin:3vh 0}
+  .rule.v{width:1px;height:100%;margin:0}
+
+  /* ============ 字体规则 ============
+     · 衬线（Noto Serif SC / Playfair）：大标题、重点金句、数字
+     · 非衬线（Noto Sans SC）：正文描述、body、补充说明
+     · 等宽（IBM Plex Mono）：kicker、meta 小标签、foot 右侧
+  */
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;opacity:.6;margin-bottom:2.6vh}
+  .display{font-family:var(--serif-en);font-weight:700;font-size:11vw;line-height:.92;letter-spacing:-.025em}
+  .display-zh{font-family:var(--serif-zh);font-weight:700;font-size:7.8vw;line-height:1.04;letter-spacing:-.005em}
+  .h1-zh{font-family:var(--serif-zh);font-weight:700;font-size:4.6vw;line-height:1.12;letter-spacing:-.005em}
+  .h2-zh{font-family:var(--serif-zh);font-weight:600;font-size:3.2vw;line-height:1.2;letter-spacing:0}
+  .h3-zh{font-family:var(--serif-zh);font-weight:500;font-size:1.9vw;line-height:1.35}
+  .body-zh{font-family:var(--sans-zh);font-weight:400;font-size:max(15px,1.22vw);line-height:1.75;opacity:.82;letter-spacing:.01em}
+  .body-serif{font-family:var(--serif-zh);font-weight:400;font-size:max(15px,1.3vw);line-height:1.65;opacity:.88}
+  .lead{font-family:var(--serif-zh);font-weight:400;font-size:1.9vw;line-height:1.4;opacity:.85}
+  .meta{font-family:var(--mono);font-size:max(11px,.88vw);letter-spacing:.16em;text-transform:uppercase;opacity:.6}
+  .big-num{font-family:var(--serif-en);font-weight:800;font-size:10vw;line-height:.85;letter-spacing:-.03em;font-feature-settings:"tnum"}
+  .mid-num{font-family:var(--serif-en);font-weight:700;font-size:5.5vw;line-height:.88;letter-spacing:-.02em;font-feature-settings:"tnum"}
+  .ghost{font-family:var(--serif-en);font-weight:900;font-size:34vw;line-height:.8;opacity:.06;letter-spacing:-.04em;position:absolute;font-feature-settings:"tnum"}
+  em{font-style:italic;font-family:var(--serif-en)}
+  .en{font-family:var(--serif-en);font-style:italic;font-weight:500}
+
+  /* ============ 布局工具 ============ */
+  .col{display:flex;flex-direction:column;gap:2.4vh}
+  .row{display:flex;align-items:center;gap:3vw}
+  .grid-6{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:4vw 6vw;flex:1;align-content:center;padding:2vh 0}
+  .grid-9{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:3vh 4vw;flex:1;align-content:center}
+  .grid-4{display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:4vh 6vw;flex:1;align-content:center}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:4vw;flex:1;align-content:center}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:4vw;flex:1;align-items:center}
+  .split-55{display:grid;grid-template-columns:55fr 45fr;gap:5vw;flex:1;align-items:stretch}
+  .fill{flex:1}
+  .center{align-items:center;justify-content:center;text-align:center}
+  .bottom-left{position:absolute;left:6vw;bottom:9vh;max-width:50vw}
+  .bottom-right{position:absolute;right:6vw;bottom:9vh;max-width:50vw;text-align:right}
+  .top-right{position:absolute;right:6vw;top:6vh;text-align:right}
+
+  /* ============ Stat（数字矩阵） ============ */
+  .stat{display:flex;flex-direction:column;gap:1vh;align-items:flex-start}
+  .stat .n{font-family:var(--serif-en);font-weight:800;font-size:8vw;line-height:.88;letter-spacing:-.03em;font-feature-settings:"tnum"}
+  .stat .l{font-family:var(--sans-zh);font-size:max(13px,1.05vw);opacity:.7;margin-top:1vh;font-weight:400;line-height:1.5}
+  .stat .m{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.5;margin-bottom:.2vh}
+
+  /* ============ Callout（引用框） ============ */
+  .callout{padding:3vh 2.4vw;border-left:3px solid currentColor;position:relative;font-family:var(--serif-zh);font-size:max(15px,1.2vw);line-height:1.55;opacity:.92}
+  .slide.light .callout{background:rgba(var(--ink-rgb),.05)}
+  .slide.dark .callout{background:rgba(var(--paper-rgb),.06)}
+  .callout .cite{display:block;margin-top:1.6vh;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+  .callout .q-big{font-family:var(--serif-zh);font-weight:600;font-size:max(17px,1.6vw);line-height:1.42}
+
+  /* ============ Platform（平台卡） ============ */
+  .plat{display:flex;flex-direction:column;justify-content:flex-end;padding:2vh 0;border-top:1px solid currentColor;border-color:rgba(127,127,127,.35)}
+  .plat .name{font-family:var(--serif-zh);font-weight:700;font-size:1.8vw;margin-bottom:.6vh}
+  .plat .nb{font-family:var(--serif-en);font-weight:700;font-size:3.2vw;letter-spacing:-.02em;line-height:1;font-feature-settings:"tnum"}
+  .plat .sub{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.55;margin-top:.6vh}
+  .plat .fill{font-family:var(--sans-zh);font-weight:300;font-size:2.4vw;opacity:.28;letter-spacing:-.01em;line-height:1}
+
+  /* ============ Rowline（表格行） ============ */
+  .rowline{display:grid;grid-template-columns:1fr 2fr 1fr;gap:2vw;padding:2.2vh 0;border-top:1px solid currentColor;align-items:center;border-color:rgba(127,127,127,.25)}
+  .rowline:last-child{border-bottom:1px solid currentColor;border-color:rgba(127,127,127,.25)}
+  .rowline .k{font-family:var(--serif-zh);font-weight:700;font-size:1.7vw}
+  .rowline .v{font-family:var(--sans-zh);font-weight:400;font-size:max(14px,1.2vw);opacity:.85;line-height:1.55}
+  .rowline .m{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6;justify-self:end}
+
+  /* ============ Pillar（支柱卡片） ============ */
+  .pillar{display:flex;flex-direction:column;gap:1.8vh}
+  .pillar .ic{font-family:var(--serif-en);font-style:italic;font-size:2.6vw;opacity:.45;font-weight:400}
+  .pillar .ic svg{width:2.8vw;height:2.8vw;stroke-width:1.2;opacity:.7}
+  .pillar .t{font-family:var(--serif-zh);font-weight:700;font-size:2.4vw;line-height:1.1}
+  .pillar .d{font-family:var(--sans-zh);font-weight:400;font-size:max(14px,1.1vw);opacity:.76;line-height:1.6}
+
+  /* ============ Signature / Highlight ============ */
+  .sign{font-family:var(--serif-en);font-style:italic;font-weight:500;font-size:2vw;opacity:.7}
+  .hi{position:relative;display:inline}
+  .slide.dark .hi::after{content:"";position:absolute;left:-.1em;right:-.1em;bottom:-.05em;height:.28em;background:rgba(var(--paper-rgb),.15);z-index:-1}
+  .slide.light .hi::after{content:"";position:absolute;left:-.1em;right:-.1em;bottom:-.05em;height:.28em;background:rgba(var(--ink-rgb),.08);z-index:-1}
+
+  /* ============ Icons（Lucide via CDN） ============ */
+  .ico{width:1em;height:1em;display:inline-block;vertical-align:-.12em;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+  .ico-lg,.ico-md,.ico-sm{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+  .ico-lg{width:2.6vw;height:2.6vw;stroke-width:1.2;display:inline-block}
+  .ico-md{width:1.8vw;height:1.8vw;stroke-width:1.3;display:inline-block;vertical-align:-.4em}
+  .ico-sm{width:1.1vw;height:1.1vw;stroke-width:1.4;display:inline-block;vertical-align:-.15em;opacity:.7}
+
+  /* ============ 图片占位（虚线框，提示设计师位置） ============ */
+  .img-slot{border:1.5px dashed rgba(127,127,127,.4);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1vh;padding:2vh 2vw;font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;opacity:.55;position:relative;aspect-ratio:16/9;width:100%;max-height:56vh;margin-inline:auto;box-sizing:border-box}
+  .img-slot::before{content:"";position:absolute;inset:8px;border:1px solid currentColor;opacity:.2}
+  .img-slot .plus{font-size:2vw;font-weight:300;opacity:.5;letter-spacing:0}
+  .img-slot .label{position:relative;z-index:2;text-align:center}
+  .img-slot.r-4x3{aspect-ratio:4/3}
+  .img-slot.r-3x2{aspect-ratio:3/2}
+  .img-slot.r-1x1{aspect-ratio:1/1}
+
+  /* ============ 图片实填框（关键：固定高度 + 只裁底部） ============
+     重要约束：高度用内联 height:Nvh 精确控制，不要用 aspect-ratio（会撑破布局）
+     object-position:top center 保证严禁裁剪顶部和左右，只裁剪底部
+  */
+  .frame-img{overflow:hidden;position:relative;background:rgba(0,0,0,.04);box-sizing:border-box;width:100%;border-radius:4px}
+  .slide.dark .frame-img{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12)}
+  .frame-img > img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+  .frame-img.fit-contain > img{object-fit:contain;object-position:center center}
+  .frame-img.r-16x9{aspect-ratio:16/9;max-height:64vh}
+  .frame-img.r-16x10{aspect-ratio:16/10;max-height:56vh}
+  .frame-img.r-4x3{aspect-ratio:4/3;max-height:56vh}
+  .frame-img.r-3x2{aspect-ratio:3/2;max-height:46vh}
+  .frame-img.r-3x4{aspect-ratio:3/4;max-height:60vh}
+  .frame-img.r-1x1{aspect-ratio:1/1;max-height:50vh}
+  .frame-img.h-16{height:16vh}
+  .frame-img.h-18{height:18vh}
+  .frame-img.h-22{height:22vh}
+  .frame-img.h-26{height:26vh}
+  .frame-img.h-28{height:28vh}
+  .frame-cap{display:flex;justify-content:space-between;align-items:baseline;gap:1vw;margin-top:.8vh;font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.72}
+  .frame-cap .pf{font-family:var(--serif-zh);font-weight:600;font-size:max(13px,1vw);letter-spacing:.04em;text-transform:none;opacity:.94}
+  .frame-cap .nb{font-family:var(--serif-en);font-style:italic;font-size:max(15px,1.2vw);letter-spacing:.02em;text-transform:none;opacity:.88}
+  .frame-cap .idx{font-family:var(--mono);opacity:.5}
+  figure.tile{display:flex;flex-direction:column;margin:0;min-width:0}
+  figure.tile > .frame-img{flex:0 0 auto}
+
+  /* ============ 导航 ============ */
+  #nav{position:fixed;left:50%;bottom:2.6vh;transform:translateX(-50%);z-index:30;display:flex;gap:10px;padding:8px 14px;border-radius:999px;background:rgba(0,0,0,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  #nav .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s ease;border:0;padding:0}
+  #nav .dot:hover{background:rgba(255,255,255,.5);transform:scale(1.15)}
+  #nav .dot.active{background:rgba(255,255,255,.95);width:22px;border-radius:999px}
+  body.light-bg #nav{background:rgba(255,255,255,.25)}
+  body.light-bg #nav .dot{background:rgba(var(--ink-rgb),.25)}
+  body.light-bg #nav .dot.active{background:rgba(var(--ink-rgb),.9)}
+  #hint{position:fixed;bottom:3vh;right:3vw;z-index:30;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.4;mix-blend-mode:difference;color:#aaa}
+  body.low-power #hint{opacity:.72;color:var(--paper);mix-blend-mode:normal}
+  body.light-bg.low-power #hint{color:var(--ink)}
+
+  /* ============================================================
+     ============ LAYOUTS API · 面向 agent 的类（v2）============
+     所有 layouts.md 中的骨架都基于下面这套命名。
+     如果你在 layouts.md 里看到某个类，它必须在下面有定义。
+     ============================================================ */
+
+  /* ---------- .frame：每页主内容容器 ---------- */
+  .frame{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  /* 当 .frame 同时加了 grid 类时，grid 的 display:grid 覆盖 flex */
+  .frame.grid-2-7-5,
+  .frame.grid-2-6-6,
+  .frame.grid-2-8-4,
+  .frame.grid-3-3,
+  .frame.grid-6{display:grid}
+
+  /* ---------- 标题层级（API 名称，衬线为主） ---------- */
+  .h-hero{
+    font-family:var(--serif-zh);
+    font-weight:900;
+    font-size:10vw;
+    line-height:.96;
+    letter-spacing:-.02em;
+  }
+  .h-xl{
+    font-family:var(--serif-zh);
+    font-weight:700;
+    font-size:6.2vw;
+    line-height:1.08;
+    letter-spacing:-.01em;
+  }
+  .h-sub{
+    font-family:var(--serif-zh);
+    font-weight:500;
+    font-size:3.1vw;
+    line-height:1.25;
+    letter-spacing:0;
+    opacity:.7;
+  }
+  .h-md{
+    font-family:var(--serif-zh);
+    font-weight:600;
+    font-size:2.3vw;
+    line-height:1.3;
+  }
+  /* 英文标题专用（Playfair 衬线） */
+  .h-hero-en,.h-xl-en{font-family:var(--serif-en);letter-spacing:-.025em}
+
+  /* ---------- lead 引语 ---------- */
+  .lead{
+    font-family:var(--serif-zh);
+    font-weight:400;
+    font-size:1.75vw;
+    line-height:1.5;
+    opacity:.86;
+  }
+
+  /* ---------- meta-row 底部元数据 ---------- */
+  .meta-row{
+    display:flex;
+    gap:1.2em;
+    align-items:baseline;
+    flex-wrap:wrap;
+    font-family:var(--mono);
+    font-size:max(12px,.92vw);
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    opacity:.6;
+  }
+
+  /* ---------- stat-card（数据大字报用） ---------- */
+  .stat-card{
+    display:flex;
+    flex-direction:column;
+    gap:.8vh;
+    align-items:flex-start;
+    padding-top:1.6vh;
+    border-top:1px solid currentColor;
+    border-color:rgba(127,127,127,.3);
+  }
+  .stat-card .stat-label{
+    font-family:var(--mono);
+    font-size:max(10px,.78vw);
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    opacity:.55;
+  }
+  .stat-card .stat-nb{
+    font-family:var(--serif-en);
+    font-weight:800;
+    font-size:5.8vw;
+    line-height:.9;
+    letter-spacing:-.03em;
+    font-feature-settings:"tnum";
+    margin-top:.4vh;
+  }
+  .stat-card .stat-nb .stat-unit{
+    font-family:var(--serif-zh);
+    font-weight:500;
+    font-size:.38em;
+    letter-spacing:0;
+    opacity:.72;
+    margin-left:.14em;
+  }
+  .stat-card .stat-note{
+    font-family:var(--sans-zh);
+    font-weight:400;
+    font-size:max(13px,1.05vw);
+    line-height:1.5;
+    opacity:.72;
+    margin-top:.6vh;
+  }
+  /* 当 stat-card 用于 grid-4（2x2），数字适度放大；若页面有标题+引文在上方，可内联 style 覆盖为更小值 */
+  .grid-4 .stat-card .stat-nb{font-size:5vw}
+  /* 当只有 3 个，字也可以稍大 */
+  .grid-3 .stat-card .stat-nb{font-size:6.8vw}
+
+  /* ---------- pipeline（流水线） ---------- */
+  .pipeline-section{
+    margin-top:4.4vh;
+    padding-top:2.8vh;
+    border-top:1px dashed rgba(127,127,127,.32);
+  }
+  .pipeline-section:first-of-type{
+    border-top:0;
+    padding-top:0;
+    margin-top:3vh;
+  }
+  .pipeline-label{
+    font-family:var(--mono);
+    font-size:max(11px,.85vw);
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    opacity:.62;
+    margin-bottom:2.2vh;
+  }
+  .pipeline{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:1.2vw;
+  }
+  .pipeline[data-cols="3"]{grid-template-columns:repeat(3,1fr)}
+  .pipeline[data-cols="4"]{grid-template-columns:repeat(4,1fr)}
+  .pipeline[data-cols="6"]{grid-template-columns:repeat(6,1fr)}
+  .step{
+    display:flex;
+    flex-direction:column;
+    gap:.8vh;
+    padding-top:1.4vh;
+    border-top:1px solid currentColor;
+    border-color:rgba(127,127,127,.35);
+  }
+  .step-nb{
+    font-family:var(--serif-en);
+    font-style:italic;
+    font-weight:500;
+    font-size:1.15vw;
+    opacity:.45;
+  }
+  .step-title{
+    font-family:var(--sans-zh);
+    font-weight:700;
+    font-size:1.55vw;
+    letter-spacing:.01em;
+    line-height:1.2;
+  }
+  .step-desc{
+    font-family:var(--sans-zh);
+    font-weight:400;
+    font-size:max(12px,.95vw);
+    line-height:1.45;
+    opacity:.72;
+  }
+
+  /* ---------- 网格（layouts.md 所用） ---------- */
+  /* 这些类独立挂到任何容器上都能生效，不依赖 .frame 复合选择器 */
+  .grid-2-7-5{display:grid;grid-template-columns:7fr 5fr;gap:3vw 4vh;align-items:start}
+  .grid-2-6-6{display:grid;grid-template-columns:1fr 1fr;gap:3vw 4vh;align-items:start}
+  .grid-2-8-4{display:grid;grid-template-columns:8fr 4fr;gap:3vw 4vh;align-items:start}
+  .grid-3-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    grid-auto-rows:minmax(0,1fr);
+    gap:2.4vh 2vw;
+  }
+  /* grid-6 已在旧样式里定义为 3x2，这里仅补 align */
+
+  /* ---------- 图片 frame-img（layouts.md 主命名） ---------- */
+  /* 在旧样式里已定义，这里补 img-cap 命名别名与增强 */
+  figure.frame-img{margin:0;display:flex;flex-direction:column;min-width:0}
+  .img-cap{
+    display:block;
+    margin-top:.8vh;
+    font-family:var(--mono);
+    font-size:max(10px,.8vw);
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    opacity:.6;
+  }
+  /* callout src 命名别名 */
+  .callout-src{
+    display:block;
+    margin-top:1.6vh;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    opacity:.6;
+  }
+
+  /* ---------- chrome & foot 补位（layouts.md 简单写法） ---------- */
+  .chrome{font-family:var(--mono);font-size:max(11px,.78vw);letter-spacing:.2em;text-transform:uppercase;opacity:.62}
+  .foot{font-family:var(--mono);font-size:max(11px,.78vw);letter-spacing:.18em;text-transform:uppercase;opacity:.5}
+
+  /* ============ 动效系统(Motion One 驱动) ============
+     所有 [data-anim] 元素默认隐藏,进入页面时由 JS 逐个揭示。
+     - cascade(默认):按 DOM 顺序 stagger 120ms 淡入 + y:16→0
+     - hero(hero 页自动):慢一点的 stagger 180ms
+     - quote(含 [data-anim="line"]):逐行 600ms 淡入
+     - directional(含 [data-anim="left|right"]):左→分隔线→右
+     - pipeline(data-animate="pipeline"):Space/→ 手动推进
+     Motion One 没加载成功时(CDN 断 + 本地丢),所有 [data-anim] 会兜底显示。
+  */
+  [data-anim]{opacity:1}
+  body.motion-ready [data-anim]{opacity:0}
+  body.motion-ready [data-anim="left"]{transform:translateX(-24px)}
+  body.motion-ready [data-anim="right"]{transform:translateX(24px)}
+  body.motion-ready [data-anim="line"]{opacity:0;transform:translateY(10px)}
+  body.motion-ready [data-animate="pipeline"] [data-anim]{opacity:.15}
+  body.low-power #deck{transition:none!important}
+  body.low-power *,
+  body.low-power *::before,
+  body.low-power *::after{animation:none!important;transition:none!important}
+  body.low-power.motion-ready [data-anim],
+  body.low-power [data-anim]{opacity:1!important;transform:none!important}
+
+  /* ---------- 响应式降级 ---------- */
+  @media (max-width:900px){
+    .display{font-size:16vw}
+    .display-zh{font-size:12vw}
+    .h1-zh{font-size:7vw}
+    .h-hero{font-size:14vw}
+    .h-xl{font-size:9vw}
+    .pipeline{grid-template-columns:repeat(2,1fr)}
+    .grid-2-7-5,.grid-2-6-6,.grid-2-8-4{grid-template-columns:1fr}
+  }
+
+  /* project-level refinements from browser review */
+  .chrome{ text-transform:none!important; letter-spacing:.12em!important; }
+  .chrome .left{ text-transform:none!important; gap:0!important; }
+  .chrome .left span{ text-transform:none!important; }
+  .kicker{ font-size:15px!important; text-transform:none!important; letter-spacing:.22em!important; }
+  .foot .title.foot-plain{ font-family:var(--mono)!important; font-size:15px!important; letter-spacing:.14em!important; text-transform:none!important; color:currentColor!important; opacity:1!important; }
+  #hint{ color:rgb(241,243,245)!important; opacity:.72!important; font-size:12px!important; }
+  body.light-bg #hint{ color:rgb(10,31,61)!important; opacity:.58!important; mix-blend-mode:normal!important; }
+  .flow-steps{ display:grid!important; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr)!important; gap:1.4vw!important; align-items:stretch!important; }
+  .flow-steps .stat-card{ padding:16px 24px!important; }
+  .step-arrow{ display:grid; place-items:center; font-family:var(--serif-en); font-size:min(3.6vw,6.4vh); color:var(--paper); opacity:.84; }
+  .split-balanced{ flex:1; margin:auto 0!important; display:grid!important; grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important; gap:4vw!important; align-items:center!important; justify-content:center!important; padding-top:0!important; }
+  .split-balanced > *{ min-width:0; width:100%; }
+  .split-balanced .frame-img{ align-self:center; max-height:58vh; }
+  .frame-img{ display:flex!important; flex-direction:column!important; }
+  .preview-figure{ position:relative!important; overflow:hidden!important; }
+  .preview-hint{ position:absolute; left:50%; top:47%; transform:translate(-50%,-50%); z-index:2; display:inline-flex; align-items:center; gap:.55em; padding:.85vh 1.3vw; border:2px solid #ff4d42; border-radius:999px; background:rgba(255,255,255,.94); color:#0a1f3d; font-family:var(--sans-zh); font-size:15px; font-weight:700; letter-spacing:0; box-shadow:0 1.4vh 3vh rgba(10,31,61,.18); }
+  .preview-hint::before{ content:"↗"; display:grid; place-items:center; width:1.55em; height:1.55em; border-radius:999px; background:#ff4d42; color:#fff; font-family:var(--mono); font-size:.9em; }
+  .frame-img > img{ flex:1 1 auto!important; min-height:0!important; height:auto!important; }
+  .frame-img > .img-cap{ flex:0 0 auto!important; }
+  .fill-img > img{ object-fit:cover!important; object-position:center center!important; }
+  .img-cap{ font-size:15px!important; text-transform:none!important; letter-spacing:.08em!important; line-height:1.45!important; }
+  .img-cap.pad-cap{ padding:0 0 16px 16px!important; margin-top:0!important; }
+  .img-cap.no-cap-bottom{ padding-bottom:0!important; }
+  .slide.dark .img-cap.dark-on-light{ color:#000!important; }
+  .slide.dark .img-cap.white-cap{ color:#fff!important; }
+  a.deck-link{ color:inherit; text-decoration:underline; text-underline-offset:.16em; }
+  .root-stack{ display:grid; grid-template-columns:1fr 1fr; gap:1vw; }
+  .root-example{ padding:1.6vh 1.4vw!important; }
+  .root-example strong{ display:block; font-family:var(--sans-zh); font-size:14px; line-height:1.35; margin-bottom:.8vh; }
+  .root-example pre{ margin:0; white-space:pre-wrap; font-family:var(--mono); font-size:12px; line-height:1.35; letter-spacing:0; }
+  .upload-grid .frame-img{ height:34vh!important; }
+  .upload-grid .frame-img > img{ object-fit:cover!important; object-position:center center!important; }
+  .upload-grid .img-cap{ font-size:15px!important; text-transform:none!important; }
+  @media (max-width: 900px){
+    .split-balanced{ grid-template-columns:1fr!important; gap:3vh!important; }
+    .flow-steps{ grid-template-columns:1fr!important; gap:2vh!important; }
+    .step-arrow{ transform:rotate(90deg); }
+  }
+</style>
 </head>
 <body>
-  <div class="page-shell">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-mark">70</div>
-        <div>
-          <strong>东南亚品牌调研体验报告</strong>
-          <span>内部复盘版 · 问卷投放 2026.04.25-05.25</span>
+<script>
+  (function(){
+    const KEY = 'guizang-ppt-low-power';
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const stored = localStorage.getItem(KEY);
+    window.__lowPowerMode = stored === '1' || (stored === null && reduced);
+    function updateHint(){
+      const hint = document.getElementById('hint');
+      if(hint) hint.textContent = `← → 翻页 · B ${window.__lowPowerMode ? '动态' : '静态'} · ESC 索引`;
+    }
+    window.__setLowPowerMode = function(on, opts={}){
+      window.__lowPowerMode = !!on;
+      document.body.classList.toggle('low-power', window.__lowPowerMode);
+      if(opts.persist !== false) localStorage.setItem(KEY, window.__lowPowerMode ? '1' : '0');
+      if(window.__lowPowerMode && document.getAnimations){
+        document.getAnimations().forEach(a=>a.cancel());
+      }
+      updateHint();
+      dispatchEvent(new CustomEvent('ppt-low-power-change', {detail:{on:window.__lowPowerMode}}));
+      if(window.__playSlide) window.__playSlide(window.__currentSlideIndex || 0);
+    };
+    document.body.classList.toggle('low-power', window.__lowPowerMode);
+    addEventListener('DOMContentLoaded', updateHint, {once:true});
+  })();
+</script>
+
+<canvas id="bg-dark" class="bg"></canvas>
+<canvas id="bg-light" class="bg"></canvas>
+<div id="hint">← → 翻页 · B 静态 · ESC 索引</div>
+
+<div id="deck">
+
+<!-- ============================================================
+     SLIDES 插入区 · 在此处填充所有 <section class="slide ..."> 页面
+     每页模板参考 references/page-patterns.md
+     页面组件参考 references/components.md
+     ============================================================ -->
+
+<section class="slide hero dark" data-animate="hero">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>01 / 16</span></div></div>
+  <div style="flex:1;display:grid;align-content:center;max-width:86vw">
+    <div class="kicker" data-anim>Codex HTML部署</div>
+    <h1 class="h-hero" data-anim style="font-size:min(8vw,13vh);line-height:1.04">零成本 · 快速上传网站</h1>
+    <p class="lead" data-anim style="max-width:64vw;margin-top:3vh">从注册账号开始，把 Codex 生成的静态网页上传到 GitHub，再用 Vercel 发布成任何人都能打开的网址。</p>
+  </div>
+  <div class="foot"><span class="title foot-plain">用户体验：张全领</span><span>20-30 min</span></div>
+</section>
+
+<section class="slide dark" data-animate="stagger">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>02 / 16</span></div></div>
+  <div style="flex:1;display:grid;align-content:center;gap:5vh">
+    <div>
+      <div class="kicker" data-anim>现存痛点问题</div>
+      <h2 class="h-xl" data-anim style="max-width:88vw;font-size:min(5.6vw,9.6vh);line-height:1.08">你发过去的，不是互联网地址</h2>
+      <p class="lead" data-anim style="margin-top:2vh;max-width:78vw">本地开发环境只在你的电脑里存在，换一台电脑，就看不到。</p>
+    </div>
+    <div class="grid-2-6-6" style="align-items:stretch">
+      <div class="callout" data-anim style="min-height:25vh;background:rgba(255,255,255,.08);display:grid;align-content:center">
+        <div class="kicker">你的电脑</div>
+        <h3 class="h-md" style="font-size:min(3vw,5.4vh)">本地 HTML</h3>
+        <p class="body-zh" style="margin-top:1.8vh">只能在自己电脑上打开。</p>
+      </div>
+      <div class="callout" data-anim style="min-height:25vh;background:rgba(200,107,63,.16);display:grid;align-content:center">
+        <div class="kicker">朋友电脑</div>
+        <h3 class="h-md" style="font-size:min(3vw,5.4vh)">404 / 无法访问</h3>
+        <p class="body-zh" style="margin-top:1.8vh">没有公开网址，就不能被别人访问。</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide dark" data-animate="stagger">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>03 / 16</span></div></div>
+  <div style="flex:1;display:grid;align-content:center;gap:5vh">
+    <div>
+      <div class="kicker" data-anim>三步上线路径</div>
+      <h2 class="h-xl" data-anim style="max-width:88vw;font-size:min(5.6vw,9.6vh);line-height:1.08">代码要先给 GitHub，再给 Vercel 读取</h2>
+      <p class="lead" data-anim style="margin-top:2vh;max-width:78vw">GitHub 是中间仓库，Vercel 通过读取仓库来部署网站。</p>
+    </div>
+    <div class="flow-steps" style="align-items:stretch">
+      <div class="stat-card" data-anim style="min-height:24vh;background:rgba(255,255,255,.08)"><div class="stat-label">步骤 1</div><div class="stat-nb" style="font-size:min(3vw,5.4vh);line-height:1.05">本地代码</div><div class="stat-note">Codex 生成的网页文件</div></div>
+      <div class="step-arrow" data-anim>→</div>
+      <div class="stat-card" data-anim style="min-height:24vh;background:rgba(255,255,255,.08)"><div class="stat-label">步骤 2</div><div class="stat-nb" style="font-size:min(3vw,5.4vh);line-height:1.05">GitHub 仓库</div><div class="stat-note">保存网页文件</div></div>
+      <div class="step-arrow" data-anim>→</div>
+      <div class="stat-card" data-anim style="min-height:24vh;background:rgba(200,107,63,.16)"><div class="stat-label">步骤 3</div><div class="stat-nb" style="font-size:min(3vw,5.4vh);line-height:1.05">Vercel 部署</div><div class="stat-note">发布成公开网址</div></div>
+    </div>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide light" data-animate="slide-left">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>04 / 16</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <div data-anim>
+      <div class="kicker">文件准备</div>
+      <h2 class="h-xl" style="font-size:min(4.6vw,8vh);line-height:1.14">先把首页文件<br>命名为 index.html</h2>
+      <p class="body-zh" style="margin-top:3vh;max-width:38vw">命名为小写的 <strong>index.html</strong>，这样别人打开根链接时，页面会自动显示。</p>
+      <div class="callout" style="margin-top:4vh"><p class="body-zh">推荐结构：index.html、style.css、script.js、images/。</p></div>
+    </div>
+    <figure class="frame-img fit-contain r-16x10" data-anim style="background:rgba(255,255,255,.68);padding:0">
+      <img src="images/04-local-index-file.png" alt="Mac 文件夹里准备好的 index.html">
+      <figcaption class="img-cap pad-cap">电脑里要有真实的小写 index.html 文件。</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide light" data-animate="slide-left">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>05 / 16</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <figure class="frame-img r-16x10 fill-img" data-anim style="background:#07083a;padding:0">
+      <img src="images/06-github-signup.png" alt="GitHub 首页右上角 Sign up">
+      <figcaption class="img-cap pad-cap white-cap">点击右上角 Sign up。</figcaption>
+    </figure>
+    <div data-anim style="align-self:center">
+      <div class="kicker">账号准备</div>
+      <h2 class="h-xl" style="font-size:min(4.4vw,7.6vh);line-height:1.14">注册、验证邮箱、登录。</h2>
+      <p class="body-zh" style="margin-top:3vh">先打开 <a class="deck-link" href="https://github.com" target="_blank" rel="noopener">https://github.com</a>。GitHub 用户名会出现在仓库地址里，建议用英文或拼音。邮箱验证要完成，否则后面可能无法正常创建仓库。</p>
+      <div class="callout" style="margin-top:4vh"><p class="body-zh">建议后续用 GitHub 登录 Vercel</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide dark" data-animate="slide-up">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>06 / 16</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <div data-anim>
+      <div class="kicker">创建一个仓库</div>
+      <h2 class="h-xl" style="font-size:min(4.7vw,8vh);line-height:1.12">右上角加号，选择 New repository。</h2>
+      <p class="body-zh" style="margin-top:3vh">如果是首次注册 GitHub，左侧可能会出现 Create repository；如果已有仓库，点击右上角 +，选择 New repository。</p>
+    </div>
+    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:rgba(255,255,255,.94);padding:1vh">
+      <img src="images/07-github-new-repo-menu.png" alt="GitHub Dashboard 创建仓库入口">
+      <figcaption class="img-cap pad-cap dark-on-light">首次注册或已有仓库，入口位置会不同。</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide light" data-animate="slide-left">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>07 / 16</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <figure class="frame-img r-16x10 fill-img" data-anim style="background:white;padding:1vh">
+      <img src="images/08-github-create-repo-focused.png" alt="GitHub 新建仓库表单">
+      <figcaption class="img-cap pad-cap">填仓库名，保持 Public，点击 Create repository。</figcaption>
+    </figure>
+    <div data-anim>
+      <div class="kicker">表单怎么填</div>
+      <h2 class="h-md" style="font-size:39px;line-height:1.15">仓库名建议英文小写</h2>
+      <p class="body-zh" style="margin-top:2vh">可以用 my-html-site、brand-report、portfolio-page。不要用空格；中文不是绝对不行，但排查路径时英文更省心。</p>
+      <div class="callout" style="margin-top:3vh"><p class="body-zh">新手推荐 Public；README 可以先不勾选。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide light" data-animate="slide-left">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>08 / 16</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:white;padding:1vh">
+      <img src="images/10a-github-empty-upload-detail.png" alt="GitHub 空仓库 uploading an existing file 入口">
+      <figcaption class="img-cap">空仓库页面，直接点 uploading an existing file。</figcaption>
+    </figure>
+    <div data-anim>
+      <div class="kicker">正确入口</div>
+      <h2 class="h-xl" style="font-size:min(4.4vw,7.6vh);line-height:1.16">点蓝色文字，uploading an existing file</h2>
+      <p class="body-zh" style="margin-top:3vh">creating a new file 是在线手写代码；我们现在要上传电脑里的真实文件，所以应选择 uploading an existing file。</p>
+      <div class="callout" style="margin-top:4vh"><p class="body-zh">仓库里已经有文件时，常见 Add file -> Upload files。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide dark" data-animate="stagger">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>09 / 16</span></div></div>
+  <div style="margin-top:4vh">
+    <div class="kicker" data-anim>上传三连</div>
+    <h2 class="h-xl" data-anim style="font-size:39px;line-height:1.12">选择文件，确认列表，提交更改。</h2>
+    <p class="body-zh" data-anim style="margin-top:1.8vh;font-size:15px">如果有 style.css、script.js、images，也一起上传</p>
+  </div>
+  <div class="grid-3 upload-grid" style="margin-top:4vh">
+    <figure class="tile" data-anim><div class="frame-img h-28 fit-contain" style="background:rgba(255,255,255,.95);padding:1vh"><img src="images/11-github-choose-files.png" alt="GitHub choose your files"></div><figcaption class="img-cap">1. choose your files</figcaption></figure>
+    <figure class="tile" data-anim><div class="frame-img h-28 fit-contain" style="background:rgba(255,255,255,.95);padding:1vh"><img src="images/11-mac-file-picker.png" alt="Mac file picker"></div><figcaption class="img-cap">2. 选择真正的 index.html</figcaption></figure>
+    <figure class="tile" data-anim><div class="frame-img h-28 fit-contain" style="background:rgba(255,255,255,.95);padding:1vh"><img src="images/11-github-commit.png" alt="GitHub Commit changes"></div><figcaption class="img-cap">3. 点击 Commit changes</figcaption></figure>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide light" data-animate="slide-left">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>10 / 16</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <div data-anim>
+      <div class="kicker">提交后先别急着去 Vercel</div>
+      <h2 class="h-xl" style="font-size:min(4.3vw,7.4vh);line-height:1.15">回到仓库首页，确认最外层有 index.html。</h2>
+      <p class="body-zh" style="margin-top:3vh">关键检查点: 根目录 / index.html / 文件名大小写</p>
+    </div>
+    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:white;padding:1vh">
+      <img src="images/12-github-repo-index.png" alt="GitHub 仓库首页出现 index.html">
+      <figcaption class="img-cap pad-cap">能看到 index.html，说明上传成功。</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide hero light" data-animate="hero">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>11 / 16</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <div data-anim style="align-self:center">
+      <div class="kicker">注册Vercel</div>
+      <h2 class="h-hero" style="font-size:min(5.2vw,9vh);line-height:1.08">让 Vercel<br>接管上线</h2>
+      <p class="lead" style="margin-top:3vh;max-width:42vw"><a class="deck-link" href="https://vercel.com/" target="_blank" rel="noopener">https://vercel.com/</a>；注册 Vercel 账号，推荐使用 GitHub 账号登录，后面导入仓库更顺。</p>
+    </div>
+    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:white;padding:1vh">
+      <img src="images/13-vercel-homepage.png" alt="Vercel 官网首页 Sign Up 入口">
+      <figcaption class="img-cap pad-cap no-cap-bottom">进入 Vercel 官网后，点击 Sign Up，优先使用 GitHub 账号登录。</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide dark" data-animate="stagger">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>12 / 16</span></div></div>
+  <div style="margin-top:5vh">
+    <div class="kicker" data-anim>进入 Vercel Dashboard</div>
+    <h2 class="h-xl" data-anim style="font-size:39px;line-height:1.12">Add New 选择 Project。</h2>
+  </div>
+  <div class="grid-2-6-6 split-balanced">
+    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:rgba(255,255,255,.95);padding:1vh">
+      <img src="images/14-vercel-add-project.png" alt="Vercel Add New Project">
+      <figcaption class="img-cap">点击 Add New，再选择 Project。</figcaption>
+    </figure>
+    <div data-anim style="align-self:center">
+      <p class="body-zh">登录 Vercel 后，在项目页右上角点击 Add New，选择 Project</p>
+      <div class="callout" style="margin-top:4vh"><p class="body-zh">Vercel 项目不是 GitHub 仓库的替代品，它是发布入口。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide light" data-animate="slide-left">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>13 / 16</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:white;padding:1vh">
+      <img src="images/15-vercel-import-repo.png" alt="Vercel 导入 GitHub 仓库">
+      <figcaption class="img-cap">找到刚才的 GitHub 仓库，点击 Import。</figcaption>
+    </figure>
+    <div data-anim>
+      <div class="kicker">导入 Git</div>
+      <h2 class="h-md">在 Vercel 新建项目并导入 GitHub 仓库</h2>
+      <p class="body-zh" style="margin-top:2vh">在 Import Git Repository 里找到刚刚创建、并上传了 <strong>index.html</strong> 的仓库，点击右侧 Import。</p>
+      <div class="callout" style="margin-top:3vh"><p class="body-zh">如果还没有关联 GitHub，Import Git Repository 区域会出现选择 Git 提供程序的引导。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide light" data-animate="slide-left">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>14 / 16</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <div data-anim>
+      <div class="kicker">部署参数</div>
+      <h2 class="h-md">配置 Vercel 部署参数</h2>
+      <p class="body-zh" style="margin-top:2vh">Application Preset 选择 <strong>Other</strong>，Root Directory 保持 <strong>./</strong>，确认无误后点击底部 Deploy。</p>
+      <div class="root-stack" style="margin-top:3vh">
+        <div class="callout root-example">
+          <strong>不用改 Root Directory</strong>
+          <pre>index.html
+style.css
+script.js</pre>
+        </div>
+        <div class="callout root-example">
+          <strong>改成 website</strong>
+          <pre>website/
+  index.html
+  style.css
+  script.js</pre>
         </div>
       </div>
-      <nav class="nav" aria-label="页面导航">
-        <a href="#overview">概览</a>
-        <a href="#compare">国家对比</a>
-        <a href="#country">国家画像</a>
-        <a href="#pain">痛点矩阵</a>
-        <a href="#actions">体验机会</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero" id="top">
-        <div>
-          <span class="eyebrow"><i class="pulse"></i> Experience review dashboard</span>
-          <h1>安全刚需明确，体验短板集中在连接、远程与高温可靠性。</h1>
-          <p class="hero-copy">
-            这份网页把六国问卷从“品牌报告”重组为体验复盘：先看市场共同结构，再定位每个国家的差异化机会，最后沉淀为产品、交互、用研和服务侧可推进的行动清单。
-          </p>
-          <div class="hero-actions">
-            <a class="btn primary" href="#overview">查看关键结论</a>
-            <a class="btn" href="#actions">跳到行动建议</a>
-          </div>
-        </div>
-
-        <div class="hero-visual" aria-label="东南亚重点国家示意">
-          <div class="region-map">
-            <div class="sea-card">
-              <svg viewBox="0 0 520 520" role="img" aria-label="调研国家分布与品牌体验概览">
-                <defs>
-                  <linearGradient id="g1" x1="0" x2="1">
-                    <stop offset="0" stop-color="#1a8a84" stop-opacity=".72"/>
-                    <stop offset="1" stop-color="#427aa1" stop-opacity=".72"/>
-                  </linearGradient>
-                </defs>
-                <path d="M58 238 C118 152 162 116 234 94 C302 72 386 91 443 144" fill="none" stroke="url(#g1)" stroke-width="20" stroke-linecap="round" opacity=".22"/>
-                <path d="M86 344 C162 291 230 279 314 303 C378 321 415 356 462 411" fill="none" stroke="#e0a526" stroke-width="24" stroke-linecap="round" opacity=".22"/>
-                <path d="M112 206 L177 168 L247 185 L294 240 L263 301 L185 311 L126 276 Z" fill="#ffffff" opacity=".58"/>
-                <path d="M312 142 L378 170 L403 231 L375 291 L314 276 L285 211 Z" fill="#ffffff" opacity=".58"/>
-                <path d="M264 343 L350 319 L434 356 L455 420 L392 454 L304 421 Z" fill="#ffffff" opacity=".58"/>
-                <g fill="none" stroke="#172026" stroke-opacity=".08" stroke-width="1">
-                  <path d="M60 80 H460"/>
-                  <path d="M60 180 H460"/>
-                  <path d="M60 280 H460"/>
-                  <path d="M60 380 H460"/>
-                  <path d="M120 60 V460"/>
-                  <path d="M220 60 V460"/>
-                  <path d="M320 60 V460"/>
-                  <path d="M420 60 V460"/>
-                </g>
-              </svg>
-            </div>
-            <div class="country-pin pin-in"><i></i><span>印度 NPS 37</span></div>
-            <div class="country-pin pin-th"><i></i><span>泰国 NPS 55</span></div>
-            <div class="country-pin pin-vn"><i></i><span>越南 NPS 48</span></div>
-            <div class="country-pin pin-my"><i></i><span>马来西亚 NPS 54</span></div>
-            <div class="country-pin pin-id"><i></i><span>印尼 NPS 42</span></div>
-            <div class="country-pin pin-ph"><i></i><span>菲律宾 NPS 51</span></div>
-            <div class="floating-metric">
-              <b data-count="1507">1,507</b>
-              <span>六国完卷样本，来自 70mai APP banner 投放</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="overview">
-        <div class="section-head">
-          <h2>一屏读懂：品牌口碑强，但体验问题高度集中。</h2>
-          <p>六国核心用户画像趋同，购买动机稳定指向安全防护。复盘重点不应只看传播和定位，更要把“连接失败、远程不稳、高温关机”作为跨国家体验债务处理。</p>
-        </div>
-
-        <div class="kpi-grid">
-          <div class="kpi">
-            <small>完卷样本</small>
-            <strong data-count="1507">1,507</strong>
-            <span>越南和印度贡献最大样本量，可作为后续深访优先池。</span>
-          </div>
-          <div class="kpi">
-            <small>安全防护购买动机</small>
-            <strong data-count="75" data-suffix="%+">75%+</strong>
-            <span>六国均为首要动机，多国超过 90%。</span>
-          </div>
-          <div class="kpi">
-            <small>NPS 区间</small>
-            <strong><span data-count="37">37</span>-<span data-count="55">55</span></strong>
-            <span>整体良好到优秀，印度是提升空间最大的国家。</span>
-          </div>
-          <div class="kpi">
-            <small>共性体验痛点</small>
-            <strong data-count="3">3</strong>
-            <span>APP 连接、4G/GPS 稳定、高温发热/关机。</span>
-          </div>
-        </div>
-
-        <div class="insight-grid">
-          <article class="insight">
-            <span class="tag">用户画像</span>
-            <h3>30-50 岁男性车主是核心基本盘</h3>
-            <p>多数国家以 SUV 车主为主，马来西亚轿车占比更突出。安全取证需求强，说明产品体验必须围绕“关键时刻可信赖”来叙事和验证。</p>
-          </article>
-          <article class="insight">
-            <span class="tag">购买旅程</span>
-            <h3>线上种草到电商成交已经定型</h3>
-            <p>社媒、YouTube、TikTok、KOL 测评、用户评价共同构成决策链路。体验内容需要从参数展示转向真实场景证明。</p>
-          </article>
-          <article class="insight">
-            <span class="tag">品牌关系</span>
-            <h3>科技与性价比认知清晰，独立性仍需补课</h3>
-            <p>70mai 在多国拥有科技和性价比双重心智，但泰国、印尼、越南、印度仍存在小米强联想，影响独立品牌资产沉淀。</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="compare">
-        <div class="section-head">
-          <h2>国家对比：忠诚度不错，满意度还没有追上口碑。</h2>
-          <p>NPS 高于满意度观感，意味着用户愿意推荐品牌，但产品日常体验仍有摩擦。体验设计应优先缩短“连接-查看-取证”的时间成本。</p>
-        </div>
-
-        <div class="dashboard">
-          <div class="panel">
-            <h3>NPS 对比</h3>
-            <div class="bar-list" id="npsBars"></div>
-          </div>
-          <div class="panel">
-            <h3>样本结构</h3>
-            <div class="sample-grid" id="sampleGrid"></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="country">
-        <div class="section-head">
-          <h2>国家画像：同一套底层需求，不同市场需要不同打法。</h2>
-          <p>点击国家查看核心用户、竞品、触达渠道和体验机会。这里保留了体验复盘最需要的粒度，适合会议中快速横向切换。</p>
-        </div>
-
-        <div class="tabs" role="tablist" aria-label="选择国家" id="countryTabs"></div>
-        <div class="country-layout">
-          <article class="country-detail" id="countryDetail"></article>
-          <div class="panel">
-            <h3>典型购买路径</h3>
-            <div class="journey">
-              <div class="journey-step"><small>1</small><b>内容种草</b><span id="journeyAwareness"></span></div>
-              <div class="journey-step"><small>2</small><b>主动搜索</b><span>搜索产品信息、参数、安装和售后内容。</span></div>
-              <div class="journey-step"><small>3</small><b>横向验证</b><span id="journeyCompare"></span></div>
-              <div class="journey-step"><small>4</small><b>电商成交</b><span>在价格、套装、评价和官方可信度之间做最终权衡。</span></div>
-            </div>
-            <div style="margin-top:20px">
-              <h3>选择因素 Top 3</h3>
-              <div class="bar-list" id="factorBars"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="pain">
-        <div class="section-head">
-          <h2>痛点矩阵：跨国共性问题应进入产品体验主线。</h2>
-          <p>颜色越深表示越应优先处理。APP 连接、远程/GPS、高温可靠性不是单点投诉，而是横跨多国的体验风险。</p>
-        </div>
-
-        <div class="panel matrix" aria-label="痛点与国家矩阵">
-          <div class="matrix-row">
-            <div class="matrix-cell head">痛点</div>
-            <div class="matrix-cell head">马来西亚</div>
-            <div class="matrix-cell head">泰国</div>
-            <div class="matrix-cell head">印尼</div>
-            <div class="matrix-cell head">越南</div>
-            <div class="matrix-cell head">印度</div>
-            <div class="matrix-cell head">菲律宾</div>
-          </div>
-          <div class="matrix-row">
-            <div class="matrix-cell head">APP / Wi-Fi 连接</div>
-            <div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div>
-          </div>
-          <div class="matrix-row">
-            <div class="matrix-cell head">4G / GPS / 远程查看</div>
-            <div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell warm">中</div>
-          </div>
-          <div class="matrix-row">
-            <div class="matrix-cell head">高温 / 发热 / 关机</div>
-            <div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell warm">中</div><div class="matrix-cell hot">高</div><div class="matrix-cell warm">中</div>
-          </div>
-          <div class="matrix-row">
-            <div class="matrix-cell head">本地化语言 / ADAS</div>
-            <div class="matrix-cell">低</div><div class="matrix-cell warm">中</div><div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell warm">中</div><div class="matrix-cell warm">中</div>
-          </div>
-          <div class="matrix-row">
-            <div class="matrix-cell head">线下门店 / 售后</div>
-            <div class="matrix-cell warm">中</div><div class="matrix-cell">低</div><div class="matrix-cell hot">高</div><div class="matrix-cell">低</div><div class="matrix-cell hot">高</div><div class="matrix-cell warm">中</div>
-          </div>
-          <div class="matrix-row">
-            <div class="matrix-cell head">套装 / 配件 / 价格</div>
-            <div class="matrix-cell warm">中</div><div class="matrix-cell warm">中</div><div class="matrix-cell warm">中</div><div class="matrix-cell hot">高</div><div class="matrix-cell hot">高</div><div class="matrix-cell warm">中</div>
-          </div>
-        </div>
-      </section>
-
-      <section id="actions">
-        <div class="section-head">
-          <h2>体验机会：把品牌优势翻译成可被验证的体验承诺。</h2>
-          <p>以下建议按体验设计师可推动的范围拆解：产品交互、用研验证、内容触点、服务闭环。目标是让“安全可信赖”从口号变成可感知的使用体验。</p>
-        </div>
-
-        <div class="action-grid">
-          <article class="action-card">
-            <span class="priority">P0 / Product UX</span>
-            <h3>重做连接与取证关键路径</h3>
-            <p>围绕“连接设备、查看录像、下载证据、远程看车”建立任务漏斗。优先降低 Wi-Fi 切换、Android Auto/车机冲突、离线查看和下载卡顿造成的中断。</p>
-          </article>
-          <article class="action-card">
-            <span class="priority">P0 / Reliability</span>
-            <h3>建立高温与网络稳定性的体验验收标准</h3>
-            <p>把热关机、4G 掉线、GPS 漂移、远程看车失败转化为可复现测试场景，并在营销内容中呈现“热带/高温/弱网”真实验证。</p>
-          </article>
-          <article class="action-card">
-            <span class="priority">P1 / Localization</span>
-            <h3>做本地化语音与 ADAS 提示专项</h3>
-            <p>越南语、马来语等语音提示要从翻译升级为场景化可懂。印尼摩托车密集路况下，ADAS 应支持更细颗粒度的静音、频率和误报控制。</p>
-          </article>
-          <article class="action-card">
-            <span class="priority">P1 / Growth</span>
-            <h3>把 KOL 测评内容改成体验证明</h3>
-            <p>YouTube、TikTok、Facebook/Instagram 是关键入口。内容重点从参数罗列转向夜视、停车监控、远程查看、高温稳定、事故取证等任务表现。</p>
-          </article>
-          <article class="action-card">
-            <span class="priority">P1 / Service</span>
-            <h3>补齐线下安装、售后与正品验证</h3>
-            <p>马来西亚、印尼、印度、菲律宾均出现线下支持诉求。可设计门店/安装点查询、保修状态、配件购买、正品验证的一体化服务入口。</p>
-          </article>
-          <article class="action-card">
-            <span class="priority">P2 / Portfolio</span>
-            <h3>按国家拆产品线机会</h3>
-            <p>马来西亚关注摩托车记录仪；越南和菲律宾期待 360°、车机互联和夜视；印度需要更强散热、电池安全和价格友好套装。</p>
-          </article>
-        </div>
-
-        <div class="quote-strip">
-          <blockquote>
-            “优化 APP，让它不管是通过 Wi-Fi 还是 4G 连接记录仪都能更快一些。”
-            <cite>越南用户 · APP 连接与行驶轨迹同步</cite>
-          </blockquote>
-          <blockquote>
-            “4G 和 GPS 信号应该更强一些，经常丢失 GPS 信号，实时画面也很难连接。”
-            <cite>印尼用户 · 远程监控稳定性</cite>
-          </blockquote>
-          <blockquote>
-            “别在行车记录仪里用电池了，改成超级电容吧。机器发热太严重。”
-            <cite>印度用户 · 高温与电池安全</cite>
-          </blockquote>
-        </div>
-      </section>
-
-      <section>
-        <div class="footnote">
-          数据来源：公司《2026东南亚品牌调研问卷报告》Markdown 文件。样本国家包括马来西亚、泰国、越南、印度、印度尼西亚、菲律宾；投放位置为 70mai APP banner；问卷语言覆盖英语、泰语、越南语、马来语、菲律宾语、印尼语。页面中的飞书图片未直接引用，以避免权限和时效问题。
-        </div>
-      </section>
-    </main>
+      <p class="body-zh" style="margin-top:2vh;font-size:15px">新手最推荐第一种：直接把 index.html 放在仓库最外层。</p>
+    </div>
+    <figure class="frame-img r-16x10 fit-contain" data-anim style="background:white;padding:1vh">
+      <img src="images/16-vercel-deploy-config.png" alt="Vercel 部署参数配置页">
+      <figcaption class="img-cap">Preset 选 Other，Root Directory 默认保持 ./。</figcaption>
+    </figure>
   </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
 
-  <script>
-    const countries = [
-      {
-        id: "my",
-        name: "马来西亚",
-        sample: 187,
-        returned: 248,
-        nps: 54.17,
-        satisfaction: 4.13,
-        safety: 91.13,
-        user: "中年男性轿车车主为主，安全防护动机高度集中。",
-        competitor: "DDPAI 66.99%",
-        channel: "电商平台 29.59%，Facebook/Instagram 18.88%，TikTok 18.37%。",
-        compare: "在线搜索 66.33%，博主测评 57.14%，品牌对比 49.49%。",
-        position: "科技创新、中档为主，近四成用户认为高端。",
-        factors: [["画质", 69.35], ["性价比", 46.77], ["功能", 45.16]],
-        opportunities: ["APP 连接", "4G/GPS 稳定", "耐高温", "以旧换新", "摩托车记录仪"]
-      },
-      {
-        id: "th",
-        name: "泰国",
-        sample: 116,
-        returned: 180,
-        nps: 55,
-        satisfaction: 4.04,
-        safety: 76.67,
-        user: "30-50 岁男性 SUV 车主，重视性价比和品牌声誉。",
-        competitor: "DDPAI 19.13%，Aston 14.78%，海康 12.17%",
-        channel: "Facebook/Instagram 20.97%，电商 19.35%，TikTok 16.94%。",
-        compare: "博主测评 59.68%，在线搜索 51.61%，品牌对比 38.71%。",
-        position: "科技和性价比双重认知，中端市场为主，仍有小米联想。",
-        factors: [["性价比", 61.11], ["画质", 52.22], ["品牌声誉", 31.67]],
-        opportunities: ["APP 登录/连接", "高温发热", "4G 远程", "疲劳驾驶提醒"]
-      },
-      {
-        id: "id",
-        name: "印度尼西亚",
-        sample: 162,
-        returned: 203,
-        nps: 42,
-        satisfaction: 4.06,
-        safety: 91.63,
-        user: "35-44 岁男性 SUV 车主，基础体验和功能丰富度都重要。",
-        competitor: "DDPAI 最直接，其次 Acroder 16.57%",
-        channel: "YouTube 25.9%，电商 21.69%，Facebook/Instagram 13.25%。",
-        compare: "在线搜索 68.07%，博主测评 66.27%，品牌对比 45.18%。",
-        position: "中档、科技、性价比认知清晰，但小米绑定仍强。",
-        factors: [["画质", 57.14], ["功能", 44.33], ["产品质量", 43.84]],
-        opportunities: ["APP/4G/GPS", "ADAS 误报", "高温", "售后网点", "车机兼容"]
-      },
-      {
-        id: "vn",
-        name: "越南",
-        sample: 530,
-        returned: 753,
-        nps: 48.33,
-        satisfaction: 4.0,
-        safety: 76.49,
-        user: "35-44 岁男性 SUV 车主，品牌知名度对决策影响更高。",
-        competitor: "Vietmap 75.6%，Xiaomi 32.65%",
-        channel: "TikTok 19.56%，他人推荐 13.89%，YouTube 13.53%。",
-        compare: "博主测评 65.45%，在线搜索 45.16%，品牌对比 36.75%。",
-        position: "高品质与科技创新形象突出，中档定位占 64.42%。",
-        factors: [["画质", 47.68], ["品牌知名度", 46.22], ["产品质量", 39.04]],
-        opportunities: ["价格门槛", "越南语/ADAS", "行驶轨迹同步", "360°", "正品验证"]
-      },
-      {
-        id: "in",
-        name: "印度",
-        sample: 361,
-        returned: 450,
-        nps: 37.13,
-        satisfaction: 3.9,
-        safety: 91.11,
-        user: "35-44 岁男性 SUV 车主，价格敏感但对画质期待高。",
-        competitor: "Qubo 35.82%，Redtiger 17.33%，DDPAI 13.86%",
-        channel: "YouTube 38.95%，电商 20%，他人介绍 10.79%。",
-        compare: "在线搜索 56.84%，品牌对比 50.53%，博主测评 45.53%。",
-        position: "高科技创新转型，高端/高档定位更明显，小米联想仍强。",
-        factors: [["画质", 64.22], ["性价比", 38.44], ["产品口碑", 34.22]],
-        opportunities: ["超级电容", "4G 模块", "售后支持", "价格/套装", "盲区广角"]
-      },
-      {
-        id: "ph",
-        name: "菲律宾",
-        sample: 151,
-        returned: 175,
-        nps: 51.29,
-        satisfaction: 4.09,
-        safety: 91.43,
-        user: "35-44 岁男性 SUV 车主，科技感和画质诉求更强。",
-        competitor: "DDPAI 66.67%，海康 13.98%",
-        channel: "Facebook/Instagram 28.03%，电商 26.75%，YouTube 10.19%。",
-        compare: "搜索 65.61%，品牌对比 62.42%，博主测评 61.78%。",
-        position: "高科技创新认知最强，高端/高档定位占 52.15%。",
-        factors: [["画质", 77.14], ["功能", 54.29], ["产品质量", 44]],
-        opportunities: ["夜视/烈日画质", "Wi-Fi 传输", "内存卡 Bug", "车机互联", "防伪验证"]
-      }
-    ];
+<section class="slide dark" data-animate="slide-up">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>15 / 16</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <figure class="frame-img r-16x10 fit-contain preview-figure" data-anim style="background:rgba(255,255,255,.95);padding:1vh">
+      <img src="images/15-vercel-congrats-preview.png" alt="Vercel 部署成功后的 Congratulations 页面">
+      <span class="preview-hint">点击图片可预览网站</span>
+      <figcaption class="img-cap">Congratulations 页面里的网站预览图可以点击打开。</figcaption>
+    </figure>
+    <div data-anim style="align-self:center">
+      <div class="kicker">部署成功</div>
+      <h2 class="h-xl" style="font-size:min(4.4vw,7.6vh);line-height:1.16">发 Vercel 链接，别发 GitHub 地址。</h2>
+      <p class="body-zh" style="margin-top:3vh">GitHub 地址给人看的是文件仓库；Vercel 地址才是访问网页。自己先用浏览器打开一次，再转发给别人。</p>
+    </div>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
 
-    const palette = ["#1a8a84", "#57a773", "#427aa1", "#e0a526", "#c75b4a", "#7b6fbd"];
-    const npsBars = document.getElementById("npsBars");
-    const sampleGrid = document.getElementById("sampleGrid");
-    const tabs = document.getElementById("countryTabs");
-    const detail = document.getElementById("countryDetail");
-    const factorBars = document.getElementById("factorBars");
-    const journeyAwareness = document.getElementById("journeyAwareness");
-    const journeyCompare = document.getElementById("journeyCompare");
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let revealObserver;
-    let countObserver;
+<section class="slide hero dark" data-animate="quote">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>16 / 16</span></div></div>
+  <div style="flex:1;display:grid;place-items:center;text-align:center">
+    <div data-anim>
+      <div class="kicker">谢谢观看</div>
+      <h2 class="h-hero" style="font-size:min(7.2vw,12vh);line-height:1.1">祝你第一次部署顺利上线</h2>
+      <p class="lead" style="margin:4vh auto 0;max-width:64vw">记住这条线：本地文件 -> GitHub 仓库 -> Vercel 链接。</p>
+    </div>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
 
-    function barRow(label, value, max, color) {
-      const width = Math.max(2, value / max * 100);
-      const decimals = Number.isInteger(value) ? 0 : 1;
-      return `
-        <div class="bar-row">
-          <span>${label}</span>
-          <div class="bar-track"><div class="bar-fill" style="--value:${width}; --color:${color}"></div></div>
-          <b data-count="${value}" data-decimals="${decimals}">${Number.isInteger(value) ? value : value.toFixed(1)}</b>
-        </div>
-      `;
+</div>
+
+<div id="nav"></div>
+
+<script>
+/* =============== WebGL 双背景 ===============
+   深色页：Holographic Dispersion（全息色散 · 钛金暗流）—— 彩虹微扰、鼠标径向涟漪
+   浅色页：Spiral Vortex（旋转涡流 · 银色珍珠）—— domain-warp 流动、无中心
+   修改风格请参考 references/webgl-backgrounds.md
+*/
+const VS = `attribute vec2 position;void main(){gl_Position=vec4(position,0.0,1.0);}`;
+
+const FS_DARK = `precision highp float;
+uniform vec2 u_resolution;uniform float u_time;uniform vec2 u_mouse;
+vec3 palette(float t,vec3 a,vec3 b,vec3 c,vec3 d){return a+b*cos(6.28318*(c*t+d));}
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_resolution.xy;
+  vec2 p=uv*2.0-1.0;p.x*=u_resolution.x/u_resolution.y;
+  vec2 m=u_mouse*2.0-1.0;m.x*=u_resolution.x/u_resolution.y;
+  float md=length(p-m);
+  float mr=sin(md*15.0-u_time*4.0)*exp(-md*3.0);p+=mr*0.08;
+  vec2 p0=p;
+  for(float i=1.0;i<4.0;i++){
+    p.x+=0.1/i*sin(i*3.0*p.y+u_time*0.4)+0.05;
+    p.y+=0.1/i*cos(i*2.0*p.x+u_time*0.3)-0.05;
+  }
+  float r=length(p);float ang=atan(p.y,p.x);
+  vec3 a=vec3(0.12,0.12,0.13);
+  vec3 b=vec3(0.03,0.04,0.05);
+  vec3 c=vec3(1.0,1.0,1.0);
+  vec3 d=vec3(0.1,0.2,0.4);
+  vec3 col=palette(r*1.5+p0.x*0.5+u_time*0.1,a,b,c,d);
+  float disp=sin(r*25.0-u_time*1.5+ang*2.0)*0.5+0.5;
+  col+=vec3(disp*0.015,disp*0.01,disp*0.02);
+  float hi=pow(sin(p.x*4.0+p.y*3.0+u_time)*0.5+0.5,8.0);
+  col+=hi*0.08;
+  vec3 base=vec3(0.05,0.05,0.06);
+  col=mix(base,col,0.85);
+  gl_FragColor=vec4(col,1.0);
+}`;
+
+const FS_LIGHT = `precision highp float;
+uniform vec2 u_resolution;uniform float u_time;uniform vec2 u_mouse;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){
+  vec2 i=floor(p),f=fract(p);
+  float a=hash(i),b=hash(i+vec2(1,0));
+  float c=hash(i+vec2(0,1)),d=hash(i+vec2(1,1));
+  vec2 u=f*f*(3.0-2.0*f);
+  return mix(a,b,u.x)+(c-a)*u.y*(1.0-u.x)+(d-b)*u.x*u.y;
+}
+float fbm(vec2 p){
+  float v=0.0,a=0.5;
+  mat2 m=mat2(0.80,0.60,-0.60,0.80);
+  for(int i=0;i<5;i++){v+=a*noise(p);p=m*p*2.02;a*=0.5;}
+  return v;
+}
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_resolution.xy;
+  vec2 p=uv;p.x*=u_resolution.x/u_resolution.y;
+  vec2 m=u_mouse;m.x*=u_resolution.x/u_resolution.y;
+  vec2 md=p-m;float dl=length(md);
+  p+=normalize(md+vec2(0.0001))*exp(-dl*5.0)*0.03;
+  vec2 q=vec2(fbm(p*1.8+u_time*0.07),fbm(p*1.8+vec2(5.2,1.3)+u_time*0.06));
+  vec2 r=vec2(fbm(p*2.0+q*1.3+vec2(1.7,9.2)+u_time*0.05),
+              fbm(p*2.0+q*1.3+vec2(8.3,2.8)+u_time*0.04));
+  float f=fbm(p*2.2+r*1.5);
+  vec3 silverDark=vec3(0.86,0.85,0.84);
+  vec3 paper=vec3(0.955,0.945,0.925);
+  vec3 col=mix(silverDark,paper,f);
+  float ph=r.x*2.2+u_time*0.35;
+  col+=vec3(0.78,0.62,0.92)*sin(ph)*0.055;
+  col+=vec3(0.55,0.72,0.95)*sin(ph*0.8+2.0)*0.05;
+  float hl=smoothstep(0.48,0.92,f);
+  col+=hl*0.06;
+  gl_FragColor=vec4(col,1.0);
+}`;
+
+const mouse={x:0.5,y:0.5};
+addEventListener('mousemove',e=>{mouse.x=e.clientX/innerWidth;mouse.y=e.clientY/innerHeight});
+
+function bootGL(canvasId, fsSrc){
+  const canvas=document.getElementById(canvasId);
+  const gl=canvas.getContext('webgl',{alpha:false,antialias:true});
+  if(!gl) return ()=>false;
+  const mk=(t,s)=>{const sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);return sh};
+  const prog=gl.createProgram();
+  gl.attachShader(prog,mk(gl.VERTEX_SHADER,VS));
+  gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fsSrc));
+  gl.linkProgram(prog);gl.useProgram(prog);
+  const buf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+  const pos=gl.getAttribLocation(prog,'position');
+  gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+  const lRes=gl.getUniformLocation(prog,'u_resolution');
+  const lT=gl.getUniformLocation(prog,'u_time');
+  const lM=gl.getUniformLocation(prog,'u_mouse');
+  const resize=()=>{
+    const d=Math.min(window.devicePixelRatio||1,2);
+    canvas.width=innerWidth*d;canvas.height=innerHeight*d;
+    gl.viewport(0,0,canvas.width,canvas.height);
+  };
+  addEventListener('resize',resize);resize();
+  return (tSec)=>{
+    gl.uniform2f(lRes,canvas.width,canvas.height);
+    gl.uniform1f(lT,tSec);
+    gl.uniform2f(lM,mouse.x,1-mouse.y);
+    gl.drawArrays(gl.TRIANGLES,0,6);
+    return true;
+  };
+}
+let drawDark=null, drawLight=null, glRAF=0, glT0=Date.now();
+function startGL(){
+  if(window.__lowPowerMode || glRAF) return;
+  if(!drawDark) drawDark=bootGL('bg-dark',FS_DARK);
+  if(!drawLight) drawLight=bootGL('bg-light',FS_LIGHT);
+  glT0=Date.now();
+  function loop(){
+    if(window.__lowPowerMode){glRAF=0;return;}
+    const t=(Date.now()-glT0)/1000;
+    drawDark(t);drawLight(t);
+    glRAF=requestAnimationFrame(loop);
+  }
+  glRAF=requestAnimationFrame(loop);
+}
+function stopGL(){
+  if(glRAF) cancelAnimationFrame(glRAF);
+  glRAF=0;
+}
+startGL();
+addEventListener('ppt-low-power-change', e=>{e.detail.on ? stopGL() : startGL();});
+
+// =============== 导航（翻页 / 圆点 / 键盘 / 滚轮 / 触屏） ===============
+const deck=document.getElementById('deck');
+const slides=deck.querySelectorAll('.slide');
+const nav=document.getElementById('nav');
+let idx=0,total=slides.length,lock=false;
+
+// 关键：矫正 deck 宽度为 total * 100vw，否则翻页会错位
+deck.style.width=(total*100)+'vw';
+
+slides.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));
+  b.onclick=()=>go(i);
+  nav.appendChild(b);
+});
+
+function go(n){
+  if(lock)return;
+  idx=Math.max(0,Math.min(total-1,n));
+  window.__currentSlideIndex = idx;
+  deck.style.transform=`translateX(${-idx*100}vw)`;
+  nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  /* 主题切换：优先读 data-theme，其次从 class（light/dark）推断 */
+  const el=slides[idx];
+  const th=el.dataset.theme || (el.classList.contains('light')?'light':(el.classList.contains('dark')?'dark':'dark'));
+  document.body.classList.toggle('light-bg',th==='light');
+  /* 动效：翻页过渡中段触发当前页的入场动画（由 motion-boot 注册） */
+  if(window.__playSlide) setTimeout(()=>window.__playSlide(idx), 450);
+  lock=true;setTimeout(()=>lock=false,700);
+}
+
+/* =============== ESC 索引视图 =============== */
+let overviewOn=false;
+const ov=document.createElement('div');
+ov.id='overview';
+ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(var(--ink-rgb),.92);backdrop-filter:blur(12px);display:none;overflow-y:auto;padding:4vh 4vw';
+document.body.appendChild(ov);
+
+function buildOverview(){
+  ov.innerHTML='';
+  const grid=document.createElement('div');
+  grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';
+  slides.forEach((s,i)=>{
+    const card=document.createElement('div');
+    card.style.cssText='cursor:pointer;border-radius:6px;overflow:hidden;border:2px solid '+(i===idx?'rgba(var(--paper-rgb),.8)':'rgba(var(--paper-rgb),.15)')+';transition:border-color .2s';
+    card.onmouseenter=()=>card.style.borderColor='rgba(var(--paper-rgb),.6)';
+    card.onmouseleave=()=>card.style.borderColor=i===idx?'rgba(var(--paper-rgb),.8)':'rgba(var(--paper-rgb),.15)';
+    const wrap=document.createElement('div');
+    wrap.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:'+(s.classList.contains('light')?'var(--paper)':'var(--ink)');
+    const clone=s.cloneNode(true);
+    clone.style.cssText='width:100vw;height:100vh;transform:scale('+(1/4.5)+');transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';
+    wrap.appendChild(clone);
+    const label=document.createElement('div');
+    label.style.cssText='padding:6px 10px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--paper);opacity:.7';
+    label.textContent=(i+1)+' / '+total;
+    card.appendChild(wrap);
+    card.appendChild(label);
+    card.onclick=()=>{toggleOverview();go(i)};
+    grid.appendChild(card);
+  });
+  ov.appendChild(grid);
+}
+
+function toggleOverview(){
+  overviewOn=!overviewOn;
+  if(overviewOn){buildOverview();ov.style.display='block';}
+  else{ov.style.display='none';}
+}
+
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}
+  if(e.key && e.key.toLowerCase()==='b' && !e.metaKey && !e.ctrlKey && !e.altKey){
+    e.preventDefault();
+    window.__setLowPowerMode(!window.__lowPowerMode);
+    return;
+  }
+  if(overviewOn)return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){
+    if(window.__pipeAdvance && window.__pipeAdvance()) return;
+    go(idx+1);
+    return;
+  }
+  if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);
+  if(e.key==='Home')go(0);
+  if(e.key==='End')go(total-1);
+});
+
+let wheelTO=null,wheelAcc=0;
+addEventListener('wheel',e=>{
+  wheelAcc+=e.deltaY+e.deltaX;
+  if(Math.abs(wheelAcc)>50){
+    if(wheelAcc>0 && window.__pipeAdvance && window.__pipeAdvance()){
+      wheelAcc=0;
+    }else{
+      go(idx+(wheelAcc>0?1:-1));wheelAcc=0;
+    }
+  }
+  clearTimeout(wheelTO);wheelTO=setTimeout(()=>wheelAcc=0,150);
+},{passive:true});
+
+let tx=0,ty=0;
+addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{
+  const dx=(e.changedTouches[0].clientX-tx);
+  const dy=(e.changedTouches[0].clientY-ty);
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){
+    if(dx<0 && window.__pipeAdvance && window.__pipeAdvance()) return;
+    go(idx+(dx<0?1:-1));
+  }
+},{passive:true});
+
+go(0);
+</script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script>
+
+<!-- ============ Motion One 动效引擎（本地优先,CDN 兜底） ============
+     加载策略:先 ./assets/motion.min.js(本地,离线可用),失败 fallback 到 jsDelivr CDN
+     加载完成后挂 window.__playSlide / window.__pipeAdvance,
+     导航脚本会在翻页中段调用 __playSlide(idx),键盘/滚轮/触屏会在翻页前调用 __pipeAdvance()
+     双双失败时会兜底把所有 [data-anim] 设为可见,不让动效破坏阅读
+-->
+<script type="module">
+let motion;
+try {
+  motion = await import('./assets/motion.min.js');
+} catch(e1) {
+  try {
+    motion = await import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm');
+  } catch(e2) {
+    console.warn('[motion] local + CDN both failed, disabling animations', e1, e2);
+    document.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none'});
+    document.querySelectorAll('[data-animate="pipeline"] [data-anim]').forEach(el=>el.style.opacity='1');
+  }
+}
+
+if(motion){
+  const { animate, stagger } = motion;
+  document.body.classList.add('motion-ready');
+  const EASE = [.22, 1, .36, 1];
+  const slides = [...document.querySelectorAll('.slide')];
+  let pipeStep = -1;
+  let lastIdx = -1;
+
+  function resetAnims(slide){
+    slide.querySelectorAll('[data-anim]').forEach(el=>{
+      el.style.opacity='';
+      el.style.transform='';
+    });
+  }
+
+  function revealStatic(slide){
+    resetAnims(slide);
+    document.getAnimations?.().forEach(a=>a.cancel());
+    slide.querySelectorAll('[data-anim]').forEach(el=>{
+      el.style.opacity='1';
+      el.style.transform='none';
+    });
+  }
+
+  function playSlide(i){
+    const slide = slides[i];
+    if(!slide) return;
+    lastIdx = i;
+    const recipe = slide.dataset.animate || (slide.classList.contains('hero') ? 'hero' : 'cascade');
+
+    if(window.__lowPowerMode){
+      revealStatic(slide);
+      return;
     }
 
-    function formatCount(value, decimals = 0, suffix = "") {
-      const fixed = Number(value).toFixed(decimals);
-      const formatted = decimals > 0
-        ? fixed.replace(/\.0$/, "")
-        : Math.round(value).toLocaleString("en-US");
-      return `${formatted}${suffix}`;
-    }
-
-    function setFinalCount(element) {
-      const target = Number(element.dataset.count);
-      const decimals = Number(element.dataset.decimals || 0);
-      const suffix = element.dataset.suffix || "";
-      element.textContent = formatCount(target, decimals, suffix);
-    }
-
-    function animateCount(element) {
-      if (element.dataset.animated === "true") return;
-      element.dataset.animated = "true";
-
-      const target = Number(element.dataset.count);
-      const decimals = Number(element.dataset.decimals || 0);
-      const suffix = element.dataset.suffix || "";
-      const duration = Math.min(1500, Math.max(800, target * 13));
-      const start = performance.now();
-
-      function tick(now) {
-        const progress = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        element.textContent = formatCount(target * eased, decimals, suffix);
-        if (progress < 1) {
-          requestAnimationFrame(tick);
-        } else {
-          setFinalCount(element);
-        }
-      }
-
-      element.textContent = formatCount(0, decimals, suffix);
-      requestAnimationFrame(tick);
-    }
-
-    function setupObservers() {
-      if (reduceMotion) return;
-
-      revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          revealObserver.unobserve(entry.target);
-        });
-      }, { threshold: .12, rootMargin: "0px 0px -8% 0px" });
-
-      countObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          animateCount(entry.target);
-          countObserver.unobserve(entry.target);
-        });
-      }, { threshold: .35 });
-    }
-
-    function registerMotion(root = document) {
-      const revealTargets = root.querySelectorAll([
-        ".section-head",
-        ".kpi",
-        ".insight",
-        ".panel",
-        ".sample",
-        ".country-detail",
-        ".journey-step",
-        ".action-card",
-        "blockquote",
-        ".footnote"
-      ].join(","));
-
-      revealTargets.forEach((element, index) => {
-        element.classList.add("reveal");
-        element.style.setProperty("--delay", `${Math.min(index % 6, 5) * 70}ms`);
-        if (reduceMotion) {
-          element.classList.add("is-visible");
-        } else {
-          revealObserver.observe(element);
-        }
+    if(recipe === 'pipeline'){
+      pipeStep = -1;
+      slide.querySelectorAll('[data-anim]').forEach(el=>{
+        el.style.opacity='0.15';
+        el.style.transform='none';
       });
-
-      root.querySelectorAll(".bar-list").forEach((element) => {
-        if (reduceMotion) {
-          element.classList.add("is-visible");
-        } else {
-          revealObserver.observe(element);
-        }
-      });
-
-      root.querySelectorAll("[data-count]").forEach((element) => {
-        element.dataset.animated = "false";
-        if (reduceMotion) {
-          setFinalCount(element);
-        } else {
-          element.textContent = formatCount(0, Number(element.dataset.decimals || 0), element.dataset.suffix || "");
-          countObserver.observe(element);
-        }
-      });
+      return;
     }
 
-    function replayDynamicMotion(root) {
-      if (reduceMotion) {
-        registerMotion(root);
-        return;
-      }
-      registerMotion(root);
-      requestAnimationFrame(() => {
-        root.querySelectorAll(".bar-list").forEach((element) => {
-          const rect = element.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) {
-            element.classList.add("is-visible");
-          }
-        });
-      });
+    resetAnims(slide);
+    const all = [...slide.querySelectorAll('[data-anim]')];
+    if(!all.length) return;
+
+    if(recipe === 'directional'){
+      const lefts  = all.filter(el=>el.dataset.anim==='left');
+      const divs   = all.filter(el=>el.dataset.anim==='divider');
+      const rights = all.filter(el=>el.dataset.anim==='right');
+      const others = all.filter(el=>!['left','right','divider'].includes(el.dataset.anim));
+      if(others.length) animate(others, {opacity:[0,1], y:[12,0]}, {duration:.6, delay:stagger(.1, {start:.15}), easing:EASE});
+      if(lefts.length)  animate(lefts,  {opacity:[0,1], x:[-24,0]}, {duration:.8, delay:.35, easing:EASE});
+      if(divs.length)   animate(divs,   {opacity:[0,.25]},          {duration:.5, delay:.9});
+      if(rights.length) animate(rights, {opacity:[0,1], x:[24,0]},  {duration:.8, delay:1.0, easing:EASE});
+      return;
     }
 
-    function replayBars(barList) {
-      if (reduceMotion) {
-        barList.classList.add("is-visible");
-        barList.querySelectorAll("[data-count]").forEach(setFinalCount);
-        return;
-      }
-
-      barList.classList.remove("is-visible");
-      barList.querySelectorAll(".bar-fill").forEach((bar) => {
-        bar.style.transition = "none";
-        bar.style.transform = "scaleX(0)";
-      });
-
-      requestAnimationFrame(() => {
-        barList.querySelectorAll(".bar-fill").forEach((bar) => {
-          bar.style.transition = "";
-          bar.style.transform = "";
-        });
-        requestAnimationFrame(() => {
-          barList.classList.add("is-visible");
-        });
-      });
-
-      barList.querySelectorAll("[data-count]").forEach((element) => {
-        element.dataset.animated = "false";
-        animateCount(element);
-      });
+    if(recipe === 'quote'){
+      const lines = all.filter(el=>el.dataset.anim==='line');
+      const others = all.filter(el=>el.dataset.anim!=='line');
+      if(others.length) animate(others, {opacity:[0,1], y:[8,0]},    {duration:.6, delay:stagger(.12, {start:.2}), easing:EASE});
+      if(lines.length)  animate(lines,  {opacity:[.35,1], y:[10,0]}, {duration:.8, delay:stagger(.55, {start:.5}), easing:EASE});
+      return;
     }
 
-    function renderStaticCharts() {
-      const sorted = [...countries].sort((a, b) => b.nps - a.nps);
-      npsBars.innerHTML = sorted.map((item, index) => barRow(item.name, item.nps, 60, palette[index])).join("");
-      sampleGrid.innerHTML = countries.map((item) => `
-        <div class="sample">
-          <strong data-count="${item.sample}">${item.sample}</strong>
-          <span>${item.name}完卷 / 回收 ${item.returned}</span>
-        </div>
-      `).join("");
+    if(recipe === 'hero'){
+      animate(all, {opacity:[0,1], y:[14,0]}, {duration:.9, delay:stagger(.16, {start:.2}), easing:EASE});
+      return;
     }
 
-    function renderTabs(activeId) {
-      tabs.innerHTML = countries.map((item) => `
-        <button class="tab" type="button" role="tab" aria-selected="${item.id === activeId}" data-id="${item.id}">
-          ${item.name}
-        </button>
-      `).join("");
-      tabs.querySelectorAll("button").forEach((button) => {
-        button.addEventListener("click", () => renderCountry(button.dataset.id));
-      });
-    }
+    // default: cascade
+    animate(all, {opacity:[0,1], y:[16,0]}, {duration:.75, delay:stagger(.1, {start:.15}), easing:EASE});
+  }
 
-    function renderCountry(id) {
-      const item = countries.find((country) => country.id === id) || countries[0];
-      renderTabs(item.id);
-      detail.innerHTML = `
-        <h3>${item.name}</h3>
-        <p>${item.user}</p>
-        <div class="split-metrics">
-          <div class="mini-metric"><small>NPS</small><strong data-count="${item.nps}" data-decimals="1">${item.nps}</strong></div>
-          <div class="mini-metric"><small>满意度</small><strong data-count="${item.satisfaction}" data-decimals="2">${item.satisfaction}</strong></div>
-          <div class="mini-metric"><small>安全动机</small><strong data-count="${item.safety}" data-decimals="1" data-suffix="%">${item.safety}%</strong></div>
-        </div>
-        <div class="meta-row">
-          <span class="tag">竞品：${item.competitor}</span>
-          <span class="tag">样本：${item.sample} 完卷</span>
-        </div>
-        <p><strong>品牌定位：</strong>${item.position}</p>
-        <p><strong>体验机会：</strong>${item.opportunities.join(" / ")}</p>
-      `;
-      journeyAwareness.textContent = item.channel;
-      journeyCompare.textContent = item.compare;
-      factorBars.innerHTML = item.factors.map((factor, index) => barRow(factor[0], factor[1], 80, palette[index])).join("");
-      replayDynamicMotion(document.getElementById("country"));
-      replayBars(factorBars);
+  function pipeAdvance(){
+    if(window.__lowPowerMode) return false;
+    const slide = slides[lastIdx];
+    if(!slide || slide.dataset.animate !== 'pipeline') return false;
+    const steps  = [...slide.querySelectorAll('[data-anim="step"]')];
+    const arrows = [...slide.querySelectorAll('[data-anim="arrow"]')];
+    if(pipeStep >= steps.length - 1) return false;
+    pipeStep++;
+    animate(steps[pipeStep], {opacity:[0.15,1], y:[8,0]}, {duration:.5, easing:EASE});
+    if(pipeStep > 0 && arrows[pipeStep-1]){
+      animate(arrows[pipeStep-1], {opacity:[0.15,.7]}, {duration:.3, delay:.15});
     }
+    return true;
+  }
 
-    setupObservers();
-    renderStaticCharts();
-    renderCountry("my");
-    registerMotion(document);
-  </script>
+  window.__playSlide = playSlide;
+  window.__pipeAdvance = pipeAdvance;
+
+  // 首屏:go(0) 已跑过(同步),没来得及触发动效 → 这里补一下
+  playSlide(0);
+}
+</script>
 </body>
 </html>
