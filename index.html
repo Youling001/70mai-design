@@ -449,8 +449,9 @@
   .chrome .left{ text-transform:none!important; gap:0!important; }
   .chrome .left span{ text-transform:none!important; }
   .kicker{ font-size:clamp(15px,1.34vw,22px)!important; line-height:1.55!important; text-transform:none!important; letter-spacing:.22em!important; }
-  .foot .title.foot-plain{ font-family:var(--mono)!important; font-size:15px!important; letter-spacing:.14em!important; text-transform:none!important; color:currentColor!important; opacity:1!important; }
-  #hint{ color:rgb(241,243,245)!important; opacity:.72!important; font-size:12px!important; }
+  .foot{ font-size:14px!important; }
+  .foot .title.foot-plain{ font-family:var(--mono)!important; font-size:16px!important; letter-spacing:.14em!important; text-transform:none!important; color:currentColor!important; opacity:1!important; }
+  #hint{ color:rgb(241,243,245)!important; opacity:.72!important; font-size:14px!important; }
   body.light-bg #hint{ color:rgb(10,31,61)!important; opacity:.58!important; mix-blend-mode:normal!important; }
   .flow-steps{ display:grid!important; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr)!important; gap:1.4vw!important; align-items:stretch!important; }
   .flow-steps .stat-card{ padding:16px 24px!important; }
@@ -467,8 +468,21 @@
   .slide > div > p.body-zh{ font-size:clamp(15px,1.34vw,22px)!important; line-height:1.55!important; }
   .frame-img{ display:flex!important; flex-direction:column!important; }
   .preview-figure{ position:relative!important; overflow:hidden!important; }
-  .preview-hint{ position:absolute; left:50%; top:47%; transform:translate(-50%,-50%); z-index:2; display:inline-flex; align-items:center; gap:.55em; padding:.85vh 1.3vw; border:2px solid #ff4d42; border-radius:999px; background:rgba(255,255,255,.94); color:#0a1f3d; font-family:var(--sans-zh); font-size:15px; font-weight:700; letter-spacing:0; box-shadow:0 1.4vh 3vh rgba(10,31,61,.18); }
-  .preview-hint::before{ content:"↗"; display:grid; place-items:center; width:1.55em; height:1.55em; border-radius:999px; background:#ff4d42; color:#fff; font-family:var(--mono); font-size:.9em; }
+  .preview-hint{ position:absolute; left:50%; top:47%; transform:translate(-50%,-50%); z-index:2; display:inline-flex; align-items:center; gap:.55em; padding:.85vh 1.3vw; border:2px solid #ff4d42; border-radius:999px; background:rgba(255,255,255,.94); color:#0a1f3d; font-family:var(--sans-zh); font-size:15px; font-weight:700; letter-spacing:0; box-shadow:0 1.4vh 3vh rgba(10,31,61,.18); animation:previewHintPulse 1.8s ease-in-out infinite; will-change:transform,box-shadow; }
+  .preview-hint::before{ content:"↗"; display:grid; place-items:center; width:1.55em; height:1.55em; border-radius:999px; background:#ff4d42; color:#fff; font-family:var(--mono); font-size:.9em; animation:previewHintArrow 1.8s ease-in-out infinite; }
+  .preview-hint::after{ content:""; position:absolute; inset:-2px; border:2px solid rgba(255,77,66,.72); border-radius:inherit; pointer-events:none; animation:previewHintRing 1.8s ease-out infinite; }
+  @keyframes previewHintPulse{
+    0%,100%{ transform:translate(-50%,-50%) scale(1); box-shadow:0 1.4vh 3vh rgba(10,31,61,.18); }
+    50%{ transform:translate(-50%,-50%) scale(1.055); box-shadow:0 1.6vh 3.4vh rgba(255,77,66,.24); }
+  }
+  @keyframes previewHintArrow{
+    0%,100%{ transform:translate(0,0); }
+    50%{ transform:translate(.16em,-.16em); }
+  }
+  @keyframes previewHintRing{
+    0%{ opacity:.72; transform:scale(1); }
+    72%,100%{ opacity:0; transform:scale(1.18,1.48); }
+  }
   .frame-img > img{ flex:1 1 auto!important; min-height:0!important; height:auto!important; }
   .frame-img > .img-cap{ flex:0 0 auto!important; }
   .fill-img > img{ width:100%!important; height:100%!important; object-fit:cover!important; object-position:center center!important; }
@@ -486,10 +500,45 @@
   .upload-grid .frame-img{ height:34vh!important; }
   .upload-grid .frame-img > img{ object-fit:cover!important; object-position:center center!important; }
   .upload-grid .img-cap{ font-size:15px!important; text-transform:none!important; }
+  .benefit-list{ display:grid; gap:1.6vh; margin-top:3vh; }
+  .benefit-item{ padding:1.8vh 1.6vw; background:rgba(255,255,255,.08); border-left:2px solid rgba(var(--paper-rgb),.55); }
+  .benefit-item strong{ display:block; font-family:var(--serif-zh); font-size:min(2.2vw,3.8vh); line-height:1.18; margin-bottom:.6vh; }
+  .benefit-item span{ display:block; font-family:var(--sans-zh); font-size:clamp(14px,1.18vw,19px); line-height:1.5; opacity:.76; }
+  .why-vercel-shot > img{ object-fit:cover!important; object-position:center center!important; }
+  .tool-cards{ display:grid; grid-template-columns:1fr 1fr; gap:4vw; margin-top:5vh; }
+  .tool-card{ min-height:30vh; border:0; border-radius:0; background:rgba(255,255,255,.075); display:grid; grid-template-columns:auto 1fr; align-items:center; gap:2.4vw; padding:4vh 3vw; box-shadow:none; }
+  .tool-mark{ width:min(9vw,14vh); aspect-ratio:1; border-radius:0; background:rgba(255,255,255,.08); color:var(--paper); display:grid; place-items:center; font-family:var(--serif-en); font-weight:900; font-size:min(5vw,8vh); line-height:1; }
+  .tool-mark.github-mark svg{ width:62%; height:62%; fill:currentColor; display:block; }
+  .tool-mark.vercel-mark::before{ content:""; width:0; height:0; border-left:min(3vw,5vh) solid transparent; border-right:min(3vw,5vh) solid transparent; border-bottom:min(5.2vw,8.2vh) solid currentColor; transform:translateY(.4vh); }
+  .tool-card h3{ font-family:var(--serif-en); font-weight:800; font-size:min(4.2vw,7vh); line-height:1; margin:0; letter-spacing:-.02em; }
+  .tool-card p{ font-family:var(--sans-zh); font-size:clamp(15px,1.34vw,22px); line-height:1.5; margin:1.4vh 0 0; opacity:.78; }
+  .slide.light .tool-card{ background:rgba(var(--ink-rgb),.055); }
+  .slide.light .tool-mark{ background:var(--ink); color:var(--paper); }
+  .github-hosting-grid{ --media-panel-bg:rgba(0,0,0,.32); display:grid; grid-template-columns:1fr 1fr; gap:3vw; margin-top:4vh; }
+  .platform-panel{ min-height:42vh; border:0; border-radius:0; background:rgba(255,255,255,.075); padding:3vh 2.8vw; display:flex; flex-direction:column; justify-content:space-between; }
+  .platform-panel h3{ font-family:var(--serif-zh); font-size:min(3vw,5vh); line-height:1.1; margin:0; }
+  .platform-panel .collab-image{ width:100%; height:29vh; object-fit:contain; object-position:center; display:block; margin-top:2vh; padding:.6vh .5vw; background:var(--media-panel-bg); }
+  .code-box{ height:29vh; margin-top:2vh; border:0; border-radius:0; background:var(--media-panel-bg); padding:2.2vh 1.8vw; color:#9bf7b5; font-family:var(--mono); font-size:clamp(12px,1.08vw,18px); line-height:1.55; letter-spacing:0; white-space:pre-wrap; }
+  .collab-art{ flex:1; min-height:24vh; position:relative; margin-top:2vh; }
+  .collab-core{ position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); width:7.4vw; height:7.4vw; min-width:86px; min-height:86px; border-radius:22px; border:2px solid rgba(142,246,255,.55); background:rgba(88,240,255,.1); box-shadow:0 0 42px rgba(88,240,255,.18); }
+  .collab-core::before{ content:""; position:absolute; inset:24%; border-radius:14px; border:2px solid rgba(216,250,255,.65); }
+  .collab-node{ position:absolute; width:5.2vw; height:5.2vw; min-width:62px; min-height:62px; border-radius:999px; background:rgba(88,240,255,.14); border:1px solid rgba(142,246,255,.42); box-shadow:0 0 28px rgba(88,240,255,.12); }
+  .collab-node::before{ content:""; position:absolute; left:50%; top:25%; width:22%; height:22%; border-radius:50%; background:#8d95ff; transform:translateX(-50%); }
+  .collab-node::after{ content:""; position:absolute; left:50%; top:49%; width:48%; height:28%; border-radius:50% 50% 42% 42%; background:#405bff; transform:translateX(-50%); }
+  .collab-node.n1{ left:8%; top:8%; }
+  .collab-node.n2{ right:8%; top:10%; }
+  .collab-node.n3{ left:14%; bottom:6%; }
+  .collab-node.n4{ right:14%; bottom:8%; }
+  .collab-line{ position:absolute; left:50%; top:50%; width:34%; height:2px; background:linear-gradient(90deg,transparent,rgba(142,246,255,.75),transparent); transform-origin:left center; }
+  .collab-line.l1{ transform:rotate(-145deg); }
+  .collab-line.l2{ transform:rotate(-35deg); }
+  .collab-line.l3{ transform:rotate(145deg); }
+  .collab-line.l4{ transform:rotate(35deg); }
   @media (max-width: 900px){
     .split-balanced{ grid-template-columns:1fr!important; gap:3vh!important; }
     .flow-steps{ grid-template-columns:1fr!important; gap:2vh!important; }
     .step-arrow{ transform:rotate(90deg); }
+    .tool-cards,.github-hosting-grid{ grid-template-columns:1fr; }
   }
 </style>
 </head>
@@ -533,17 +582,17 @@
      ============================================================ -->
 
 <section class="slide hero dark" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>01 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>01 / 18</span></div></div>
   <div style="flex:1;display:grid;align-content:center;max-width:86vw">
     <div class="kicker" data-anim>Codex HTML部署</div>
-    <h1 class="h-hero" data-anim style="font-size:min(8vw,13vh);line-height:1.04">零成本 · 快速上传网站</h1>
+    <h1 class="h-hero" data-anim style="font-size:min(8vw,13vh);line-height:1.04">零成本 · 快速部署网站</h1>
     <p class="lead" data-anim style="max-width:64vw;margin-top:3vh">从注册账号开始，把 Codex 生成的静态网页上传到 GitHub，再用 Vercel 发布成任何人都能打开的网址。</p>
   </div>
   <div class="foot"><span class="title foot-plain">用户体验：张全领</span><span>20-30 min</span></div>
 </section>
 
 <section class="slide dark" data-animate="stagger">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>02 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>02 / 18</span></div></div>
   <div style="flex:1;display:grid;align-content:center;gap:5vh">
     <div>
       <div class="kicker" data-anim>现存痛点问题</div>
@@ -567,26 +616,87 @@
 </section>
 
 <section class="slide dark" data-animate="stagger">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>03 / 16</span></div></div>
-  <div style="flex:1;display:grid;align-content:center;gap:5vh">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>03 / 18</span></div></div>
+  <div style="flex:1;display:grid;align-content:center;gap:4vh">
     <div>
-      <div class="kicker" data-anim>三步上线路径</div>
-      <h2 class="h-xl" data-anim style="max-width:88vw;font-size:min(5.6vw,9.6vh);line-height:1.08">代码要先给 GitHub，再给 Vercel 读取</h2>
-      <p class="lead" data-anim style="margin-top:2vh;max-width:78vw">GitHub 是中间仓库，Vercel 通过读取仓库来部署网站。</p>
+      <div class="kicker" data-anim>第三方工具</div>
+      <h2 class="h-xl" data-anim style="max-width:88vw;font-size:min(5.6vw,9.6vh);line-height:1.08">这个时候，需要第三方工具</h2>
+      <p class="lead" data-anim style="margin-top:2vh;max-width:78vw">一个负责托管代码，一个负责把网站部署到互联网上。</p>
     </div>
-    <div class="flow-steps" style="align-items:stretch">
-      <div class="stat-card" data-anim style="min-height:24vh;background:rgba(255,255,255,.08)"><div class="stat-label">步骤 1</div><div class="stat-nb" style="font-size:min(3vw,5.4vh);line-height:1.05">本地代码</div><div class="stat-note">Codex 生成的网页文件</div></div>
-      <div class="step-arrow" data-anim>→</div>
-      <div class="stat-card" data-anim style="min-height:24vh;background:rgba(255,255,255,.08)"><div class="stat-label">步骤 2</div><div class="stat-nb" style="font-size:min(3vw,5.4vh);line-height:1.05">GitHub 仓库</div><div class="stat-note">保存网页文件</div></div>
-      <div class="step-arrow" data-anim>→</div>
-      <div class="stat-card" data-anim style="min-height:24vh;background:rgba(200,107,63,.16)"><div class="stat-label">步骤 3</div><div class="stat-nb" style="font-size:min(3vw,5.4vh);line-height:1.05">Vercel 部署</div><div class="stat-note">发布成公开网址</div></div>
+    <div class="tool-cards">
+      <div class="tool-card" data-anim>
+        <div class="tool-mark github-mark" aria-label="GitHub">
+          <svg viewBox="0 0 98 96" role="img" aria-hidden="true">
+            <path d="M48.9 0C21.9 0 0 21.9 0 48.9c0 21.6 14 39.9 33.4 46.4 2.4.5 3.3-1.1 3.3-2.3v-8.6c-13.6 3-16.4-5.8-16.4-5.8-2.2-5.7-5.4-7.2-5.4-7.2-4.5-3 .3-3 .3-3 4.9.3 7.5 5 7.5 5 4.4 7.5 11.5 5.3 14.3 4.1.4-3.2 1.7-5.3 3.1-6.6-10.8-1.2-22.2-5.4-22.2-24.2 0-5.3 1.9-9.7 5-13.1-.5-1.2-2.2-6.2.5-12.9 0 0 4.1-1.3 13.4 5 3.9-1.1 8-1.6 12.1-1.6s8.2.5 12.1 1.6c9.3-6.3 13.4-5 13.4-5 2.7 6.7 1 11.7.5 12.9 3.1 3.4 5 7.8 5 13.1 0 18.8-11.4 23-22.3 24.2 1.8 1.5 3.3 4.5 3.3 9.1v13.5c0 1.3.9 2.8 3.4 2.3C84 88.8 98 70.5 98 48.9 97.8 21.9 75.9 0 48.9 0z"/>
+          </svg>
+        </div>
+        <div>
+          <h3>GitHub</h3>
+          <p>代码托管 / 协作平台</p>
+        </div>
+      </div>
+      <div class="tool-card" data-anim>
+        <div class="tool-mark vercel-mark"></div>
+        <div>
+          <h3>Vercel</h3>
+          <p>云端部署 / 生成公开链接</p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
+<section class="slide dark" data-animate="stagger">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>04 / 18</span></div></div>
+  <div style="flex:1;display:grid;align-content:center;gap:3vh">
+    <div>
+      <div class="kicker" data-anim>GitHub 托管代码</div>
+      <h2 class="h-xl" data-anim style="max-width:88vw;font-size:min(5.3vw,9vh);line-height:1.08">程序世界，用 GitHub 托管代码</h2>
+      <p class="lead" data-anim style="margin-top:2vh;max-width:82vw">它像程序世界的网盘，但更重要的是代码托管、开源协作和团队修改的入口。</p>
+    </div>
+    <div class="github-hosting-grid">
+      <div class="platform-panel" data-anim>
+        <h3>开源平台</h3>
+        <div class="code-box">const app = createSite();
+const db = connectDB();
+app.use(middleware);
+git commit -m "deploy"
+git push origin main
+open vercel.app</div>
+      </div>
+      <div class="platform-panel" data-anim>
+        <h3>协作平台</h3>
+        <img class="collab-image" src="images/04-github-collaboration.svg" alt="GitHub 连接多位协作者的团队协作网络">
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
+<section class="slide dark" data-animate="directional">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>05 / 18</span></div></div>
+  <div class="grid-2-6-6 split-balanced">
+    <div data-anim="left">
+      <div class="kicker">Vercel 云端部署发布</div>
+      <h2 class="h-xl" style="font-size:min(4.7vw,8vh);line-height:1.12">轻量化网页部署服务</h2>
+      <p class="body-zh" style="margin-top:3vh">Vercel 的价值不是写代码，而是把本地文件变成可转发、可访问、可更新的公开网站。</p>
+      <div class="benefit-list">
+        <div class="benefit-item"><strong>不用买服务器</strong><span>个人轻量项目可以从免费计划开始。</span></div>
+        <div class="benefit-item"><strong>自动生成链接</strong><span>部署完成后直接得到 xxx.vercel.app。</span></div>
+        <div class="benefit-item"><strong>连接 GitHub</strong><span>后续改文件、提交仓库，Vercel 可以自动更新网站。</span></div>
+      </div>
+    </div>
+    <figure class="frame-img r-16x10 why-vercel-shot" data-anim="right" style="background:rgba(255,255,255,.05);padding:0">
+      <img src="images/05-vercel-cloud-publishing.png" alt="本地网页文件上传云端后可由电脑、手机和用户访问的示意图">
+      <figcaption class="img-cap pad-cap white-cap">适合个人轻量部署，把网页放到云端。</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span class="title"></span><span></span></div>
+</section>
+
 <section class="slide light" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>04 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>06 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <div data-anim="left">
       <div class="kicker">文件准备</div>
@@ -603,7 +713,7 @@
 </section>
 
 <section class="slide light" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>05 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>07 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <figure class="frame-img r-16x10 fill-img github-signup-shot" data-anim="left" style="background:#07083a;padding:0">
       <img src="images/06-github-signup.png" alt="GitHub 首页右上角 Sign up">
@@ -619,8 +729,8 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide dark" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>06 / 16</span></div></div>
+<section class="slide light" data-animate="directional">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>08 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <div data-anim="left">
       <div class="kicker">创建一个仓库</div>
@@ -636,7 +746,7 @@
 </section>
 
 <section class="slide light" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>07 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>09 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <figure class="frame-img r-16x10 fill-img" data-anim="left" style="background:white;padding:1vh">
       <img src="images/08-github-create-repo-focused.png" alt="GitHub 新建仓库表单">
@@ -653,7 +763,7 @@
 </section>
 
 <section class="slide light" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>08 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>10 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <figure class="frame-img r-16x10 fit-contain" data-anim="left" style="background:white;padding:1vh">
       <img src="images/10a-github-empty-upload-detail.png" alt="GitHub 空仓库 uploading an existing file 入口">
@@ -669,8 +779,8 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide dark" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>09 / 16</span></div></div>
+<section class="slide light" data-animate="directional">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>11 / 18</span></div></div>
   <div style="margin-top:4vh">
     <div class="kicker" data-anim>上传三连</div>
     <h2 class="h-xl deck-main-title" data-anim>选择文件，确认列表，提交更改。</h2>
@@ -685,7 +795,7 @@
 </section>
 
 <section class="slide light" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>10 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>12 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <div data-anim="left">
       <div class="kicker">提交后先别急着去 Vercel</div>
@@ -701,7 +811,7 @@
 </section>
 
 <section class="slide hero light" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>11 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>13 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <div data-anim="left" style="align-self:center">
       <div class="kicker">注册Vercel</div>
@@ -716,8 +826,8 @@
   <div class="foot"><span class="title"></span><span></span></div>
 </section>
 
-<section class="slide dark" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>12 / 16</span></div></div>
+<section class="slide light" data-animate="directional">
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>14 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <figure class="frame-img r-16x10 fit-contain" data-anim="left" style="background:rgba(255,255,255,.95);padding:1vh">
       <img src="images/14-vercel-add-project.png" alt="Vercel Add New Project">
@@ -734,7 +844,7 @@
 </section>
 
 <section class="slide light" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>13 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>15 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <figure class="frame-img r-16x10 fit-contain" data-anim="left" style="background:white;padding:1vh">
       <img src="images/15-vercel-import-repo.png" alt="Vercel 导入 GitHub 仓库">
@@ -751,7 +861,7 @@
 </section>
 
 <section class="slide light" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>14 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>16 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <div data-anim="left">
       <div class="kicker">部署参数</div>
@@ -783,7 +893,7 @@ script.js</pre>
 </section>
 
 <section class="slide dark" data-animate="directional">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>15 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>17 / 18</span></div></div>
   <div class="grid-2-6-6 split-balanced">
     <figure class="frame-img r-16x10 fit-contain preview-figure" data-anim="left" style="background:rgba(255,255,255,.95);padding:1vh">
       <img src="images/15-vercel-congrats-preview.png" alt="Vercel 部署成功后的 Congratulations 页面">
@@ -800,7 +910,7 @@ script.js</pre>
 </section>
 
 <section class="slide hero dark" data-animate="quote">
-  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>16 / 16</span></div></div>
+  <div class="chrome"><div class="left"><span>AI Coding 部署上线新手教程</span></div><div class="right"><span>18 / 18</span></div></div>
   <div style="flex:1;display:grid;place-items:center;text-align:center">
     <div data-anim>
       <div class="kicker">谢谢观看</div>

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-label="Local website deployed to cloud and shared to viewers">
+  <defs>
+    <radialGradient id="glowCloud" cx="50%" cy="48%" r="52%">
+      <stop offset="0%" stop-color="#58f0ff" stop-opacity="0.95"/>
+      <stop offset="44%" stop-color="#1896c9" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#0a1f3d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowNode" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d9faff" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#58f0ff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#58f0ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="screen" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7cf7ff" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#2a73ff" stop-opacity="0.34"/>
+    </linearGradient>
+    <linearGradient id="cloudBody" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#c7fbff"/>
+      <stop offset="48%" stop-color="#49d8f4"/>
+      <stop offset="100%" stop-color="#196aa4"/>
+    </linearGradient>
+    <filter id="softGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.18  0 0 0 0 0.82  0 0 0 0 1  0 0 0 .85 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="lineGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="dotGrid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#bff8ff" opacity="0.12"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="760" fill="#071c36"/>
+  <rect width="1200" height="760" fill="url(#dotGrid)"/>
+  <path d="M178 608C293 474 364 236 537 236c172 0 183 230 345 204 99-16 159-118 238-154" fill="none" stroke="#d8faff" stroke-opacity="0.05" stroke-width="2"/>
+  <path d="M146 154c178-74 365-61 532-5 156 52 271 26 405-42" fill="none" stroke="#58f0ff" stroke-opacity="0.08" stroke-width="2"/>
+
+  <g opacity="0.75">
+    <circle cx="866" cy="196" r="126" fill="none" stroke="#8ef6ff" stroke-opacity="0.16" stroke-width="2"/>
+    <circle cx="866" cy="196" r="86" fill="none" stroke="#8ef6ff" stroke-opacity="0.12" stroke-width="1.5"/>
+    <path d="M743 196h246M866 70c-46 64-46 189 0 252M866 70c46 64 46 189 0 252" fill="none" stroke="#8ef6ff" stroke-opacity="0.12" stroke-width="1.5"/>
+  </g>
+
+  <g transform="translate(108 404)">
+    <path d="M42 0h250c22 0 40 18 40 40v130H2V40C2 18 20 0 42 0Z" fill="#123459" stroke="#82f2ff" stroke-opacity="0.42" stroke-width="3"/>
+    <rect x="26" y="28" width="282" height="116" rx="12" fill="url(#screen)" opacity="0.8"/>
+    <path d="M0 172h338l42 42H-42Z" fill="#0d2747" stroke="#82f2ff" stroke-opacity="0.34" stroke-width="2"/>
+    <path d="M63 62h128M63 91h194M63 119h82" stroke="#e8feff" stroke-width="10" stroke-linecap="round" opacity="0.46"/>
+    <circle cx="260" cy="90" r="24" fill="#f3d3a2" opacity="0.9"/>
+  </g>
+
+  <g filter="url(#lineGlow)">
+    <path d="M444 512C524 476 565 440 626 382" fill="none" stroke="#8cfbff" stroke-width="7" stroke-linecap="round"/>
+    <path d="M626 382l-24-2 28-28 2 40Z" fill="#8cfbff"/>
+    <path d="M456 480c53-4 86-21 125-58" fill="none" stroke="#5ff5ff" stroke-width="3" stroke-linecap="round" opacity="0.62"/>
+    <path d="M441 544c78-15 136-53 193-104" fill="none" stroke="#c9fbff" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+  </g>
+
+  <g transform="translate(514 208)" filter="url(#softGlow)">
+    <ellipse cx="216" cy="318" rx="210" ry="34" fill="#58f0ff" opacity="0.18"/>
+    <ellipse cx="216" cy="318" rx="150" ry="16" fill="#f0ffff" opacity="0.18"/>
+    <circle cx="146" cy="164" r="78" fill="url(#cloudBody)"/>
+    <circle cx="238" cy="126" r="100" fill="url(#cloudBody)"/>
+    <circle cx="328" cy="176" r="82" fill="url(#cloudBody)"/>
+    <rect x="116" y="164" width="272" height="116" rx="56" fill="url(#cloudBody)"/>
+    <rect x="178" y="132" width="142" height="178" rx="18" fill="#0c3156" opacity="0.86"/>
+    <path d="M198 166h102M198 207h102M198 248h102" stroke="#8cfbff" stroke-width="8" stroke-linecap="round" opacity="0.74"/>
+    <circle cx="198" cy="166" r="5" fill="#d7ffff"/>
+    <circle cx="198" cy="207" r="5" fill="#d7ffff"/>
+    <circle cx="198" cy="248" r="5" fill="#d7ffff"/>
+  </g>
+
+  <g filter="url(#lineGlow)" stroke="#c9fbff" stroke-width="3" fill="none" opacity="0.68">
+    <path d="M802 358C850 274 896 230 955 204"/>
+    <path d="M836 410C908 395 964 403 1034 434"/>
+    <path d="M817 464C882 528 935 554 1014 560"/>
+    <path d="M762 490C782 568 828 614 904 646"/>
+  </g>
+
+  <g>
+    <g transform="translate(934 164)">
+      <circle cx="40" cy="40" r="58" fill="url(#glowNode)"/>
+      <circle cx="40" cy="24" r="16" fill="#7f8cff"/>
+      <path d="M12 70c5-21 20-32 28-32s23 11 28 32" fill="#405bff" opacity="0.92"/>
+      <ellipse cx="40" cy="76" rx="52" ry="14" fill="#60f2ff" opacity="0.28"/>
+    </g>
+    <g transform="translate(1010 394)">
+      <circle cx="40" cy="40" r="52" fill="url(#glowNode)"/>
+      <circle cx="40" cy="24" r="15" fill="#7f8cff"/>
+      <path d="M14 68c5-19 19-29 26-29s21 10 26 29" fill="#405bff" opacity="0.92"/>
+      <ellipse cx="40" cy="73" rx="48" ry="12" fill="#60f2ff" opacity="0.28"/>
+    </g>
+    <g transform="translate(988 522)">
+      <circle cx="40" cy="40" r="50" fill="url(#glowNode)"/>
+      <circle cx="40" cy="24" r="15" fill="#7f8cff"/>
+      <path d="M14 68c5-19 19-29 26-29s21 10 26 29" fill="#405bff" opacity="0.92"/>
+      <ellipse cx="40" cy="73" rx="48" ry="12" fill="#60f2ff" opacity="0.28"/>
+    </g>
+    <g transform="translate(878 610)">
+      <circle cx="40" cy="40" r="48" fill="url(#glowNode)"/>
+      <circle cx="40" cy="24" r="14" fill="#7f8cff"/>
+      <path d="M15 66c5-18 18-27 25-27s20 9 25 27" fill="#405bff" opacity="0.92"/>
+      <ellipse cx="40" cy="70" rx="46" ry="12" fill="#60f2ff" opacity="0.28"/>
+    </g>
+  </g>
+</svg>

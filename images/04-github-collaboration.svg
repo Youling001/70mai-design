@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">GitHub 团队协作网络</title>
+  <desc id="desc">GitHub 位于中央，连接四位协作者与代码信息面板。</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="48%" r="72%">
+      <stop offset="0" stop-color="#123a67"/>
+      <stop offset=".58" stop-color="#071f3d"/>
+      <stop offset="1" stop-color="#04162e"/>
+    </radialGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#78f3ff"/>
+      <stop offset="1" stop-color="#3d6cff"/>
+    </linearGradient>
+    <linearGradient id="person" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#9a8cff"/>
+      <stop offset="1" stop-color="#4054ff"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g fill="none" stroke="#315c8c" opacity=".34">
+    <ellipse cx="800" cy="470" rx="520" ry="128" stroke-dasharray="9 14"/>
+    <ellipse cx="800" cy="470" rx="390" ry="88"/>
+    <path d="M80 150h180M1320 720h200M95 755h115" stroke-dasharray="3 12"/>
+  </g>
+  <g fill="none" stroke="#67e8ff" stroke-width="5" filter="url(#glow)">
+    <path d="M675 405C585 350 540 260 445 232"/>
+    <path d="M925 405c90-55 135-145 230-173"/>
+    <path d="M675 535c-90 55-135 145-230 173"/>
+    <path d="M925 535c90 55 135 145 230 173"/>
+  </g>
+  <g fill="#75efff" filter="url(#glow)">
+    <circle cx="675" cy="405" r="7"/><circle cx="445" cy="232" r="7"/>
+    <circle cx="925" cy="405" r="7"/><circle cx="1155" cy="232" r="7"/>
+    <circle cx="675" cy="535" r="7"/><circle cx="445" cy="708" r="7"/>
+    <circle cx="925" cy="535" r="7"/><circle cx="1155" cy="708" r="7"/>
+  </g>
+  <g>
+    <rect x="650" y="310" width="300" height="320" rx="54" fill="#09264a" stroke="#69eaff" stroke-width="4" filter="url(#glow)"/>
+    <circle cx="800" cy="470" r="94" fill="#f4f8ff"/>
+    <path fill="#08203d" d="M800 382c-49 0-89 40-89 89 0 39 25 72 61 84 4 1 6-2 6-4v-16c-25 5-31-11-31-11-4-10-10-13-10-13-8-6 1-6 1-6 9 1 14 10 14 10 8 14 22 10 27 8 1-6 3-10 6-13-20-2-41-10-41-44 0-10 4-18 10-24-1-3-4-12 1-24 0 0 8-3 25 10a86 86 0 0 1 44 0c17-13 25-10 25-10 5 12 2 21 1 24 6 6 10 14 10 24 0 34-21 42-41 44 4 3 6 8 6 17v24c0 3 2 5 7 4 35-12 60-45 60-84 0-49-40-89-89-89z"/>
+  </g>
+  <g fill="#071f3d" stroke="#55dff4" stroke-width="3">
+    <circle cx="390" cy="210" r="96"/><circle cx="1210" cy="210" r="96"/>
+    <circle cx="390" cy="730" r="96"/><circle cx="1210" cy="730" r="96"/>
+  </g>
+  <g fill="url(#person)">
+    <circle cx="390" cy="185" r="25"/><path d="M340 252c5-35 25-53 50-53s45 18 50 53c-26 20-74 20-100 0z"/>
+    <circle cx="1210" cy="185" r="25"/><path d="M1160 252c5-35 25-53 50-53s45 18 50 53c-26 20-74 20-100 0z"/>
+    <circle cx="390" cy="705" r="25"/><path d="M340 772c5-35 25-53 50-53s45 18 50 53c-26 20-74 20-100 0z"/>
+    <circle cx="1210" cy="705" r="25"/><path d="M1160 772c5-35 25-53 50-53s45 18 50 53c-26 20-74 20-100 0z"/>
+  </g>
+  <g fill="#09213d" stroke="#35678f" stroke-width="2">
+    <rect x="105" y="150" width="180" height="90" rx="16"/><rect x="1315" y="150" width="180" height="90" rx="16"/>
+    <rect x="105" y="680" width="180" height="90" rx="16"/><rect x="1315" y="680" width="180" height="90" rx="16"/>
+  </g>
+  <g stroke-linecap="round" fill="none">
+    <path d="M130 185h22l10-13 12 25 12-15h60" stroke="#65e9ff" stroke-width="7"/>
+    <path d="M1340 181h54m-54 22h106m-106 22h75" stroke="#4b86b8" stroke-width="7"/>
+    <path d="M135 712h105m-105 24h74" stroke="#4b86b8" stroke-width="7"/>
+    <path d="M1340 710h86m-86 24h57" stroke="#4b86b8" stroke-width="7"/>
+  </g>
+  <circle cx="1454" cy="727" r="21" fill="#59e5ff"/><path d="m1444 727 8 8 15-18" fill="none" stroke="#06213c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
